@@ -18,7 +18,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8082/">Home</a>
                 </li>
                 <li class="nav-item">
@@ -27,7 +27,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8082/habits">Habits</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="http://localhost:8082/visualizer">Visualizer</a>
                 </li>
             </ul>
@@ -37,28 +37,27 @@
 <body>
 
 <div class="jumbotron">
-    <h1 class="display-4" data-th-text="${habitAmount}"></h1>
+    <h1 class="display-4" text="Visualize your progress!"></h1>
     <p class="lead">Total bad habits</p>
 </div>
 
-<table>
-    <tr>
-        <th>Name</th>
-    </tr>
-    <td data-th-text="${users}"></td>
-    </tr>
-    <tr>
-        <th>Habits</th>
-    </tr>
-    <tr th:each="habit : ${habits}">
-        <td data-th-text="${habit.rating}"></td>
-        <td data-th-text="${habit.name}"></td>
-        <td data-th-text="${habit.dateAdded}"></td>
-    </tr>
-</table>
+<div>
+    <h1>User</h1>
+    <table>
+        <tr>
+            <td data-th-text="${siteUser}">None</td>
+        </tr>
 
-<div class="graph">
-    <h1>Graph</h1>
+    </table>
+
+    <h1>Habits</h1>
+    <table>
+        <tr data-th-each="habit : ${habits}">
+        <td data-th-text="${habit.name}"></td>
+        <td data-th-text="${habit.rating}"></td>
+        </tr>
+    </table>
+
 </div>
 
 </body>

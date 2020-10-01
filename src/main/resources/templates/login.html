@@ -19,10 +19,10 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8082/">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="http://localhost:8082/login">Login</a>
                 </li>
                 <li class="nav-item">
@@ -41,16 +41,14 @@
     </div>
 
 
-    <form>
+    <form action="#" th:action="@{/login}" method="post" th:object="${siteUser}">
         <div class="form-group">
             <label for="inputUsername">Username</label>
-            <input type="text" class="form-control" id="inputUsername">
-        </div>
-        <div class="form-group">
+            <input type="text" th:field="*{userId}" class="form-control" id="inputUsername"/></p>
             <label for="inputPassword">Password</label>
-            <input type="password" class="form-control" id="inputPassword">
+            <input type="password" th:field="*{password}" class="form-control" id="inputPassword"/></p>
+            <button type="submit" class="btn btn-primary">Login</button>
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
     </form>
 
     </body>

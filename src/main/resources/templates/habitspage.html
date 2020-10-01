@@ -18,14 +18,14 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8082/">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8082/login">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8082/habits">Habits</a>
+                    <a class="nav-link active" href="http://localhost:8082/habits">Habits</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8082/visualizer">Visualizer</a>
@@ -39,16 +39,14 @@
         <h1 class="display-4">Add habits you want to curb here!</h1>
     </div>
 
-    <form>
+    <form action="#" th:action="@{/habits}" method="post" th:object="${habit}">
         <div class="form-group">
-            <label for="inputHabit">Habit Name</label>
-            <input type="text" class="form-control" id="inputHabit">
+            <label for="inputHabitName">Habit Name </label>
+            <input type="text" th:field="*{name}" class="form-control" id="inputHabitName"/>
+            <label for="inputHabitRating">Habit Rating </label>
+            <input type="text" th:field="*{rating}" class="form-control" id="inputHabitRating"/>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </div>
-        <div class="form-group">
-            <label for="inputRating">Habit Rating</label>
-            <input type="text" class="form-control" id="inputRating">
-        </div>
-        <button type="submit" class="btn btn-primary">Add Habit</button>
     </form>
 
     </body>

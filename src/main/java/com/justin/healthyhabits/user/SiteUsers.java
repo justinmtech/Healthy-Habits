@@ -21,6 +21,12 @@ public class SiteUsers {
         this.password = password;
     }
 
+    public SiteUsers(String userId, String password, List<Habits> habits) {
+        this.userId = userId;
+        this.password = password;
+        this.habits = habits;
+    }
+
     public List<Habits> getHabits() {
         return habits;
     }

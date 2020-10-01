@@ -11,14 +11,13 @@ public class Habits {
     private int habitId;
     private String name;
     private int rating;
-    private String dateAdded;
+    //private String dateAdded;
 
     public Habits() {}
 
-    public Habits(String name, int rating, String dateAdded) {
+    public Habits(String name, int rating) {
         this.name = name;
         this.rating = rating;
-        this.dateAdded = dateAdded;
     }
 
     public int getHabitId() {
@@ -43,13 +42,5 @@ public class Habits {
 
     public void setRating(int rating) {
         this.rating = rating;
-    }
-
-    public String getDateAdded() {
-        return dateAdded;
-    }
-
-    public void setDateAdded(String dateAdded) {
-        this.dateAdded = dateAdded;
     }
 }
