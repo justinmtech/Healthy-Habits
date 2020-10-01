@@ -1,4 +1,4 @@
-package user;
+package com.justin.healthyhabits.user;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -6,19 +6,27 @@ import java.util.Date;
 
 @Entity
 public class Habits {
+
     @Id
     private int habitId;
-    private String category;
     private String name;
     private int rating;
-    private Date dateAdded;
+    private String dateAdded;
 
-    public String getCategory() {
-        return category;
+    public Habits() {}
+
+    public Habits(String name, int rating, String dateAdded) {
+        this.name = name;
+        this.rating = rating;
+        this.dateAdded = dateAdded;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public int getHabitId() {
+        return habitId;
+    }
+
+    public void setHabitId(int habitId) {
+        this.habitId = habitId;
     }
 
     public String getName() {
@@ -37,11 +45,11 @@ public class Habits {
         this.rating = rating;
     }
 
-    public Date getDateAdded() {
+    public String getDateAdded() {
         return dateAdded;
     }
 
-    public void setDateAdded(Date dateAdded) {
+    public void setDateAdded(String dateAdded) {
         this.dateAdded = dateAdded;
     }
 }
