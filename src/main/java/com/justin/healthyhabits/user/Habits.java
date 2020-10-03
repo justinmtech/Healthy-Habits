@@ -1,13 +1,14 @@
 package com.justin.healthyhabits.user;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
 public class Habits {
-
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int habitId;
     private String name;
     private int rating;

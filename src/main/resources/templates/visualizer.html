@@ -25,6 +25,9 @@
                     <a class="nav-link" href="http://localhost:8082/login">Login</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8082/register">Register</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8082/habits">Habits</a>
                 </li>
                 <li class="nav-item active">
@@ -37,24 +40,22 @@
 <body>
 
 <div class="jumbotron">
-    <h1 class="display-4" text="Visualize your progress!"></h1>
+    <h1 class="display-4" data-th-text="${totalHabits}"></h1>
     <p class="lead">Total bad habits</p>
 </div>
 
-<div>
-    <h1>User</h1>
-    <table>
-        <tr>
-            <td data-th-text="${siteUser}">None</td>
-        </tr>
+<div align="center">
 
-    </table>
-
-    <h1>Habits</h1>
+    <a th:hreaf="@{/visualizer}"></a>
+    <h1>Table</h1>
     <table>
-        <tr data-th-each="habit : ${habits}">
-        <td data-th-text="${habit.name}"></td>
-        <td data-th-text="${habit.rating}"></td>
+    <tr>
+    <th >HABIT</th>
+    <th >RATING</th>
+    </tr>
+        <tr  th:each="habit : ${habits}">
+            <td  th:text="${habit.name}"></td>
+            <td  th:text="${habit.rating}"></td>
         </tr>
     </table>
 

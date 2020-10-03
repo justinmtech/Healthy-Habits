@@ -1,6 +1,5 @@
 package com.justin.healthyhabits.services;
 
-import com.justin.healthyhabits.user.Habits;
 import com.justin.healthyhabits.user.SiteUsers;
 import com.justin.healthyhabits.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +21,19 @@ public class UserService {
         return allUsers;
     }
 
-    public Optional<SiteUsers> getUser(String id) {
-        return userRepository.findById(id);
+    public Optional<SiteUsers> getUser(int id) {
+        return userRepository.findById(String.valueOf(id));
     }
 
     public void addUser(SiteUsers siteUser) {
         userRepository.save(siteUser);
     }
 
-    public void saveUser(String id, SiteUsers siteUser) {
+    public void saveUser(SiteUsers siteUser) {
         userRepository.save(siteUser);
     }
 
-    public void deleteUser(String id, SiteUsers siteUser) {
+    public void deleteUser(String id) {
         userRepository.deleteById(id);
     }
 }

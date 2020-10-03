@@ -1,28 +1,33 @@
 package com.justin.healthyhabits.user;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class SiteUsers {
-
-    @Id
-    private String userId;
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int userId;
+    private String username;
     private String password;
     @OneToMany
     private List<Habits> habits;
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public SiteUsers() {}
 
-    public SiteUsers(String userId, String password) {
-        this.userId = userId;
+    public SiteUsers(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
-    public SiteUsers(String userId, String password, List<Habits> habits) {
-        this.userId = userId;
+    public SiteUsers(String username, String password, List<Habits> habits) {
+        this.username = username;
         this.password = password;
         this.habits = habits;
     }
@@ -35,11 +40,11 @@ public class SiteUsers {
         this.habits = habits;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

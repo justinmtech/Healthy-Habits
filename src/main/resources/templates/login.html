@@ -26,6 +26,9 @@
                     <a class="nav-link" href="http://localhost:8082/login">Login</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8082/register">Register</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8082/habits">Habits</a>
                 </li>
                 <li class="nav-item">
@@ -44,10 +47,11 @@
     <form action="#" th:action="@{/login}" method="post" th:object="${siteUser}">
         <div class="form-group">
             <label for="inputUsername">Username</label>
-            <input type="text" th:field="*{userId}" class="form-control" id="inputUsername"/></p>
+            <input type="text" th:field="*{username}" class="form-control" id="inputUsername"/></p>
             <label for="inputPassword">Password</label>
             <input type="password" th:field="*{password}" class="form-control" id="inputPassword"/></p>
             <button type="submit" class="btn btn-primary">Login</button>
+
         </div>
     </form>
 

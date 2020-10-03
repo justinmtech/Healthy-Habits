@@ -1,6 +1,10 @@
 package com.justin.healthyhabits.user;
 
+import com.justin.healthyhabits.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 public class Session {

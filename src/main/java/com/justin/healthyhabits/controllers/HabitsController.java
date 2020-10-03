@@ -1,5 +1,6 @@
 package com.justin.healthyhabits.controllers;
 
+import com.justin.healthyhabits.services.HabitService;
 import com.justin.healthyhabits.services.UserService;
 import com.justin.healthyhabits.user.Habits;
 import com.justin.healthyhabits.user.SiteUsers;
@@ -13,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class HabitsController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    HabitService habitService;
 
     @GetMapping("/habits")
     public String habitForm(Model model) {
@@ -29,9 +34,15 @@ public class HabitsController {
     @PostMapping("/habits")
     public String habitSubmit(@ModelAttribute Habits habit, Model model) {
         model.addAttribute("habit", habit);
-        List<Habits> habitList = new ArrayList<>();
+        System.out.println(habit.getName());
+        List<Habits> habitList = habitService.getAllHabits();
         habitList.add(habit);
-        userService.saveUser("Justin", (new SiteUsers("Justin", "password1", habitList)));
+        System.out.println("Habit size: " + habitList.size());
+        Optional<SiteUsers> user = userService.getAllUsers().stream().findFirst();
+        SiteUsers siteUser = user.get();
+        siteUser.setHabits(habitList);
+        habitService.addHabit(habit);
+        userService.saveUser(siteUser);
         return "habitspage";
     }
 }
