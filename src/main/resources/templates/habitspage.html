@@ -22,10 +22,7 @@
                     <a class="nav-link" href="http://localhost:8082/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8082/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8082/register">Register</a>
+                    <a class="nav-link" href="http://localhost:8082/logout">Logout</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="http://localhost:8082/habits">Habits</a>
@@ -45,9 +42,9 @@
     <form action="#" th:action="@{/habits}" method="post" th:object="${habit}">
         <div class="form-group">
             <label for="inputHabitName">Habit Name </label>
-            <input type="text" th:field="*{name}" class="form-control" id="inputHabitName"/>
+            <input type="text" th:field="*{name}" class="form-control" id="inputHabitName" required minlength="3" maxlength="12"/>
             <label for="inputHabitRating">Habit Rating </label>
-            <input type="text" th:field="*{rating}" class="form-control" id="inputHabitRating"/>
+            <input type="text" th:field="*{rating}" class="form-control" id="inputHabitRating" required aria-valuemin="0" aria-valuemax="10"/>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>

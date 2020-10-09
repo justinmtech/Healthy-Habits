@@ -1,10 +1,6 @@
 package com.justin.healthyhabits.user;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Date;
+import javax.persistence.*;
 
 @Entity
 public class Habits {
@@ -12,7 +8,16 @@ public class Habits {
     private int habitId;
     private String name;
     private int rating;
-    //private String dateAdded;
+    @ManyToOne
+    private SiteUsers siteUsers;
+
+    public SiteUsers getSiteUsers() {
+        return siteUsers;
+    }
+
+    public void setSiteUsers(SiteUsers siteUsers) {
+        this.siteUsers = siteUsers;
+    }
 
     public Habits() {}
 

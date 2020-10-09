@@ -28,28 +28,23 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="http://localhost:8082/register">Register</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8082/habits">Habits</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8082/visualizer">Visualizer</a>
-                </li>
             </ul>
         </div>
     </nav>
 
     <body>
-    <div class="jumbotron">
-        <h1 class="display-4">Register now to begin!</h1>
+    <div class="jumbotron" id="jumbotron">
+        <h1 class="display-4"> <strong>display:none</strong> Register now to begin!</h1>
+        <button onClick="removeElement()">Remove</button>
     </div>
 
 
-    <form action="#" th:action="@{/register}" method="post" th:object="${register}">
+    <form action="#" th:action="@{/register}" method="post" th:object="${siteUser}">
         <div class="form-group">
             <label for="inputUsername">Username</label>
-            <input type="text" th:field="*{username}" class="form-control" id="inputUsername"/></p>
+            <input type="text" th:field="*{username}" class="form-control" id="inputUsername" required minlength="3" maxlength="16"/></p>
             <label for="inputPassword">Password</label>
-            <input type="password" th:field="*{password}" class="form-control" id="inputPassword"/></p>
+            <input type="password" th:field="*{password}" class="form-control" id="inputPassword" required minlength="7" maxlength="256"/></p>
             <button type="submit" class="btn btn-primary">Create Account</button>
 
         </div>

@@ -2,7 +2,6 @@ package com.justin.healthyhabits.services;
 
 import com.justin.healthyhabits.user.Session;
 import com.justin.healthyhabits.user.SessionRepository;
-import com.justin.healthyhabits.user.SiteUsers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,7 @@ public class SessionService {
         return activeSessions;
     }
 
-    public Optional<Session> getSession(String id) {
+    public Optional<Session> getSession(int id) {
         return sessionRepository.findById(id);
     }
 
@@ -30,11 +29,11 @@ public class SessionService {
         sessionRepository.save(session);
     }
 
-    public void updateSession(Session session) {
+    public void saveSession(Session session) {
         sessionRepository.save(session);
     }
 
-    public void deleteSession(String id) {
+    public void deleteSession(int id) {
         sessionRepository.deleteById(id);
     }
 

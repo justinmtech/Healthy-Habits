@@ -1,10 +1,11 @@
 package com.justin.healthyhabits.controllers;
 
+import com.justin.healthyhabits.services.HabitService;
 import com.justin.healthyhabits.services.SessionService;
+import com.justin.healthyhabits.services.UserAuthenticator;
 import com.justin.healthyhabits.services.UserService;
 import com.justin.healthyhabits.user.Session;
 import com.justin.healthyhabits.user.SiteUsers;
-import com.justin.healthyhabits.user.UserAuthenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +17,19 @@ import java.util.Optional;
 
 @Controller
 public class LoginController {
-    private UserAuthenticator userAuthenticator = new UserAuthenticator();
+
+    @Autowired
+    UserAuthenticator userAuthenticator;
+
+    @Autowired
+    SessionService sessionService;
 
     @Autowired
     UserService userService;
+
     @Autowired
-    SessionService sessionService;
+    HabitService habitService;
+
 
     @GetMapping("/login")
     public String loginForm(Model model) {
@@ -31,11 +39,32 @@ public class LoginController {
 
     @PostMapping("/login")
     public String loginSubmit(@ModelAttribute SiteUsers siteUser, Model model) {
+        userAuthenticator.setPassword(siteUser.getPassword());
+        userAuthenticator.setUsername(siteUser.getUsername());
         model.addAttribute("siteUser", siteUser);
-        if (userAuthenticator.isAuthenticated()) {
-            sessionService.addSession(new Session(new SiteUsers(siteUser.getUsername(), siteUser.getPassword())));
+
+        SiteUsers user = new SiteUsers();
+
+        Optional<SiteUsers> siteUsersOptional = userService.getAllUsers().stream().filter(u -> u.getUsername().equals(siteUser.getUsername())).findFirst();
+        if (siteUsersOptional.isPresent()) {
+            user.setUsername(siteUsersOptional.get().getUsername());
+            user.setPassword(siteUsersOptional.get().getPassword());
+            user.setHabits(habitService.getAllHabits());
+            System.out.println("Database username: " + user.getUsername());
+            System.out.println("Database pw: " + user.getPassword());
+            System.out.println("Database habits: " + user.getHabits().size());
+            //System.out.println("Habits size: " + user.getHabits().size());
+        }
+
+        if (userAuthenticator.isAuthenticated(user, siteUser.getPassword(), siteUser.getUsername())) {
+            Session session = new Session();
+            session.setSiteUser(user);
+            userService.saveUser(user);
+            sessionService.saveSession(session);
+            System.out.println("Logged in!");
             return "visualizer";
         } else
+            System.out.println("Login failed!");
         return "home";
     }
 }

@@ -1,6 +1,7 @@
 package com.justin.healthyhabits.controllers;
 
 import com.justin.healthyhabits.services.HabitService;
+import com.justin.healthyhabits.services.SessionService;
 import com.justin.healthyhabits.services.UserService;
 import com.justin.healthyhabits.user.Habits;
 import com.justin.healthyhabits.user.SiteUsers;
@@ -10,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,10 @@ import java.util.Optional;
 
 @Controller
 public class HabitsController {
+    private List<Habits> habitList = new ArrayList<>();
+
+    @Autowired
+    SessionService sessionService;
 
     @Autowired
     UserService userService;
@@ -34,15 +38,31 @@ public class HabitsController {
     @PostMapping("/habits")
     public String habitSubmit(@ModelAttribute Habits habit, Model model) {
         model.addAttribute("habit", habit);
-        System.out.println(habit.getName());
-        List<Habits> habitList = habitService.getAllHabits();
-        habitList.add(habit);
-        System.out.println("Habit size: " + habitList.size());
-        Optional<SiteUsers> user = userService.getAllUsers().stream().findFirst();
-        SiteUsers siteUser = user.get();
-        siteUser.setHabits(habitList);
+
+        //get user based on IP
+        //filter results based on IP
+        getHabitList();
+        addToHabitList(habit);
+        setHabitList(habitList);
+
         habitService.addHabit(habit);
-        userService.saveUser(siteUser);
+        userService.saveUser(getSiteUser().get());
         return "habitspage";
+    }
+
+    private List<Habits> getHabitList() {
+        return habitService.getAllHabits();
+    }
+
+    private void addToHabitList(Habits habit) {
+        habitService.addHabit(habit);
+    }
+
+    private Optional<SiteUsers> getSiteUser() {
+        return userService.getAllUsers().stream().findFirst();
+    }
+
+    private void setHabitList(List<Habits> habitList) {
+        getSiteUser().get().setHabits(habitList);
     }
 }

@@ -1,23 +1,24 @@
 package com.justin.healthyhabits.user;
 
-import com.justin.healthyhabits.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
-import java.util.Optional;
 
 @Entity
 public class Session {
-
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int sessionId;
+    //HttpServletRequest request;
     @OneToOne
     private SiteUsers siteUser;
 
+    //public HttpServletRequest getRequest() {
+    //    return request;
+    //}
 
-    public Session(SiteUsers siteUser) {
-        this.siteUser = siteUser;
-    }
+    //public void setRequest(HttpServletRequest request) {
+    //    this.request = request;
+    //}
+
+    public Session() {}
 
     public int getSessionId() {
         return sessionId;

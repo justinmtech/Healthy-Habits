@@ -1,22 +1,17 @@
 package com.justin.healthyhabits.controllers;
 
-import com.justin.healthyhabits.user.SiteUsers;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class HomeController {
 
     @GetMapping("/")
-    public String home(Model model) {
-        SiteUsers user1 = new SiteUsers("Baka", "passwordd5");
-        List<SiteUsers> userList = new ArrayList<SiteUsers>();
-        userList.add(user1);
-        model.addAttribute("users", userList.size());
+    public String home(HttpServletRequest request) {
+        String ip = request.getRemoteAddr();
+        System.out.println(ip);
         return "home";
     }
 }

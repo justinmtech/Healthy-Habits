@@ -22,7 +22,7 @@ public class UserService {
     }
 
     public Optional<SiteUsers> getUser(int id) {
-        return userRepository.findById(String.valueOf(id));
+        return userRepository.findById(id);
     }
 
     public void addUser(SiteUsers siteUser) {
@@ -33,7 +33,7 @@ public class UserService {
         userRepository.save(siteUser);
     }
 
-    public void deleteUser(String id) {
+    public void deleteUser(int id) {
         userRepository.deleteById(id);
     }
 }

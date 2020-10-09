@@ -25,7 +25,7 @@ public class HabitService {
         habitRepository.save(habit);
     }
 
-    public Optional<Habits> getHabit(String id) {
+    public Optional<Habits> getHabit(int id) {
         return habitRepository.findById(id);
     }
 
