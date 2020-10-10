@@ -8,15 +8,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Logger {
-    private File file;
     private String time;
     private String date;
-    private boolean error;
 
     public void addToLog(String message, boolean error) {
-        this.error = error;
-        setCurrentTime();
-        setCurrentDate();
+        setCurrentDateAndTime();
         createFile(error);
 
         try (FileWriter fw = new FileWriter("src/main/resources/logs/" + date + "-" + isError(error) + ".txt", true);
@@ -30,25 +26,13 @@ public class Logger {
 
     private void createFile(boolean error) {
         try {
-            file = new File("src/main/resources/logs/" + date + "-" + isError(error) + ".txt");
+            File file = new File("src/main/resources/logs/" + date + "-" + isError(error) + ".txt");
             if (!file.exists()) {
                 file.createNewFile();
             }
         } catch (Exception e) {
             System.out.println(e.toString());
         }
-    }
-
-    private void saveFile() {
-
-    }
-
-    private void getDate() {
-
-    }
-
-    private void deleteLogFile() {
-
     }
 
     private String isError(boolean value) {
@@ -58,20 +42,11 @@ public class Logger {
         return "log";
     }
 
-    private void setCurrentTime() {
+    private void setCurrentDateAndTime() {
         LocalDateTime currentTime = LocalDateTime.now();
         String time = currentTime.format(DateTimeFormatter.ofPattern("hh:mm:ss"));
+        String date = currentTime.format(DateTimeFormatter.ofPattern("MM.dd.yyyy"));
         this.time = time;
-    }
-
-    private void setCurrentDate() {
-        LocalDateTime currentDate = LocalDateTime.now();
-        String date = currentDate.format(DateTimeFormatter.ofPattern("MM.dd.yyyy"));
         this.date = date;
-
     }
-
-
-
-
 }

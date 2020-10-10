@@ -10,7 +10,6 @@ public class ErrorPageController {
 
     @RequestMapping("/errorpage")
     public String errorPage() {
-        logger.addToLog("Error page served", false);
         return "errorpage";
     }
 
