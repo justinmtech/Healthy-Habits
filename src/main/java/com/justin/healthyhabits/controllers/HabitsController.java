@@ -16,7 +16,6 @@ import java.util.List;
 
 @Controller
 public class HabitsController {
-    private static DataValidation parser;
 
     @Autowired
     SessionService sessionService;
@@ -34,15 +33,14 @@ public class HabitsController {
     public String habitSubmit(@ModelAttribute Habit habit, Model model) {
         model.addAttribute("habit", habit);
 
-        if (parser.isValid(habit.getName(), 3, 16) &&
-            parser.isValid(habit.getRating(), 0, 10)) {
+        if (DataValidation.isValid(habit.getName(), 3, 16) &&
+            DataValidation.isValid(habit.getRating(), 0, 10)) {
                 setHabitList(getHabitList());
                 addToHabitList(habit);
                 userService.saveUser(getSiteUser());
             } else {
             return "errorpage";
         }
-
         return "habitspage";
     }
 
