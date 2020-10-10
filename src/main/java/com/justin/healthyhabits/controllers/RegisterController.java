@@ -2,7 +2,7 @@ package com.justin.healthyhabits.controllers;
 
 import com.justin.healthyhabits.services.DataValidation;
 import com.justin.healthyhabits.services.UserService;
-import com.justin.healthyhabits.user.SiteUser;
+import com.justin.healthyhabits.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,18 +17,23 @@ public class RegisterController {
 
     @GetMapping("/register")
     public String register(Model model) {
-        model.addAttribute("siteUser", new SiteUser());
+        model.addAttribute("user", new User());
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerSubmit(@ModelAttribute SiteUser siteUser, Model model) {
-        model.addAttribute("siteUser", siteUser);
-        if (DataValidation.isValid(siteUser.getUsername(), 3, 16) &&
-            DataValidation.isPasswordValid(siteUser.getPassword(), 7, 128)) {
-            userService.addUser(siteUser);
-            return "registersuccessful";
-        } else {
+    public String registerSubmit(@ModelAttribute User user, Model model) {
+        model.addAttribute("user", user);
+        try {
+            if (DataValidation.isValid(user.getUsername(), 3, 16) &&
+                    DataValidation.isPasswordValid(user.getPassword(), 7, 128)) {
+                userService.addUser(user);
+                return "registersuccessful";
+            } else {
+                return "errorpage";
+            }
+        } catch (NullPointerException e) {
+            System.out.println(e.toString());
             return "errorpage";
         }
     }

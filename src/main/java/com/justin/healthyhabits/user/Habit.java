@@ -9,14 +9,14 @@ public class Habit {
     private String name;
     private int rating;
     @ManyToOne
-    private SiteUser siteUser;
+    private User user;
 
-    public SiteUser getSiteUsers() {
-        return siteUser;
+    public User getSiteUsers() {
+        return user;
     }
 
-    public void setSiteUsers(SiteUser siteUser) {
-        this.siteUser = siteUser;
+    public void setSiteUsers(User user) {
+        this.user = user;
     }
 
     public Habit() {}

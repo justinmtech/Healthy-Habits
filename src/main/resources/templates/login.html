@@ -35,7 +35,7 @@
     </div>
 
 
-    <form action="#" th:action="@{/login}" method="post" th:object="${siteUser}">
+    <form action="#" th:action="@{/login}" method="post" th:object="${user}">
         <div class="form-group">
             <label for="inputUsername">Username</label>
             <input type="text" th:field="*{username}" class="form-control" id="inputUsername" required/></p>

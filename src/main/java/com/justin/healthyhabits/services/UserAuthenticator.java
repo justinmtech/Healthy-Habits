@@ -1,6 +1,6 @@
 package com.justin.healthyhabits.services;
 
-import com.justin.healthyhabits.user.SiteUser;
+import com.justin.healthyhabits.user.User;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +18,7 @@ public class UserAuthenticator {
         this.passwordInput = passwordInput;
     }
 
-    public boolean isAuthenticated(SiteUser user, String password, String username) {
+    public boolean isAuthenticated(User user, String password, String username) {
         System.out.println(password);
         System.out.println(username);
             if (this.passwordInput.equals(user.getPassword()) && this.usernameInput.equals(user.getUsername())) {

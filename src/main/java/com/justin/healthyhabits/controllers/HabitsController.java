@@ -4,7 +4,7 @@ import com.justin.healthyhabits.services.DataValidation;
 import com.justin.healthyhabits.services.SessionService;
 import com.justin.healthyhabits.services.UserService;
 import com.justin.healthyhabits.user.Habit;
-import com.justin.healthyhabits.user.SiteUser;
+import com.justin.healthyhabits.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Controller
 public class HabitsController {
@@ -32,16 +33,19 @@ public class HabitsController {
     @PostMapping("/habits")
     public String habitSubmit(@ModelAttribute Habit habit, Model model) {
         model.addAttribute("habit", habit);
-
-        if (DataValidation.isValid(habit.getName(), 3, 16) &&
-            DataValidation.isValid(habit.getRating(), 0, 10)) {
+        try {
+            if (DataValidation.isValid(habit.getName(), 3, 16) &&
+                    DataValidation.isValid(habit.getRating(), 0, 10)) {
                 setHabitList(getHabitList());
                 addToHabitList(habit);
                 userService.saveUser(getSiteUser());
-            } else {
+                return "habitspage";
+            } else
+                return "errorpage";
+        } catch (NullPointerException | NoSuchElementException e) {
+            System.out.println(e.toString());
             return "errorpage";
         }
-        return "habitspage";
     }
 
     private List<Habit> getHabitList() {
@@ -52,7 +56,7 @@ public class HabitsController {
         getSiteUser().getHabits().add(habit);
     }
 
-    private SiteUser getSiteUser() {
+    private User getSiteUser() {
         return sessionService.getAllSessions().stream().findFirst().get().getSiteUser();
     }
 

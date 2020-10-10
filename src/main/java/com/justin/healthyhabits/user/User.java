@@ -4,7 +4,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class SiteUser {
+@Table(name = "users")
+public class User {
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int userId;
     private String username;
@@ -19,14 +20,14 @@ public class SiteUser {
         this.username = username;
     }
 
-    public SiteUser() {}
+    public User() {}
 
-    public SiteUser(String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public SiteUser(String username, String password, List<Habit> habits) {
+    public User(String username, String password, List<Habit> habits) {
         this.username = username;
         this.password = password;
         this.habits = habits;
