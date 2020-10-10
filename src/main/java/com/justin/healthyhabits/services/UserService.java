@@ -1,7 +1,7 @@
 package com.justin.healthyhabits.services;
 
-import com.justin.healthyhabits.user.SiteUsers;
-import com.justin.healthyhabits.user.UserRepository;
+import com.justin.healthyhabits.repositories.UserRepository;
+import com.justin.healthyhabits.user.SiteUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,21 +15,21 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public List<SiteUsers> getAllUsers() {
-        List<SiteUsers> allUsers = new ArrayList<>();
+    public List<SiteUser> getAllUsers() {
+        List<SiteUser> allUsers = new ArrayList<>();
         userRepository.findAll().forEach(allUsers::add);
         return allUsers;
     }
 
-    public Optional<SiteUsers> getUser(int id) {
+    public Optional<SiteUser> getUser(int id) {
         return userRepository.findById(id);
     }
 
-    public void addUser(SiteUsers siteUser) {
+    public void addUser(SiteUser siteUser) {
         userRepository.save(siteUser);
     }
 
-    public void saveUser(SiteUsers siteUser) {
+    public void saveUser(SiteUser siteUser) {
         userRepository.save(siteUser);
     }
 

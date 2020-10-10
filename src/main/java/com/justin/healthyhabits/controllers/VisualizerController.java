@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.NoSuchElementException;
+
 @Controller
 public class VisualizerController {
 
@@ -18,17 +20,17 @@ public class VisualizerController {
 
     @RequestMapping("/visualizer")
     public String showGraph(Model model) {
-        //userService.getAllUsers();
-        //Optional<SiteUsers> siteUser = userService.getAllUsers().stream().findFirst();
-        int userId = sessionService.getAllSessions().stream().findAny().get().getSiteUser().getUserId();
+        int userId;
 
-        model.addAttribute("totalHabits", userService.getUser(userId).get().getHabits().size());
-        model.addAttribute("habits", userService.getUser(userId).get().getHabits());
-        model.addAttribute("siteUser", userService.getUser(userId));
-
-/*        Map<String, Integer> habitMap = new HashMap<>();
-        for (int i = 0; i < habitList.size(); i++) {}*/
-
+        try {
+            userId = sessionService.getAllSessions().stream().findAny().orElseThrow().getSiteUser().getUserId();
+            model.addAttribute("totalHabits", userService.getUser(userId).orElseThrow().getHabits().size());
+            model.addAttribute("habits", userService.getUser(userId).orElseThrow().getHabits());
+            model.addAttribute("siteUser", userService.getUser(userId));
+        } catch (NoSuchElementException | NullPointerException e) {
+            System.out.println(e.toString());
+            return "errorpage";
+        }
         return "visualizer";
     }
 }

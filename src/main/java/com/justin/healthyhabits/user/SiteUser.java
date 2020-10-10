@@ -4,13 +4,13 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class SiteUsers {
+public class SiteUser {
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int userId;
     private String username;
     private String password;
-    @OneToMany
-    private List<Habits> habits;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Habit> habits;
     public String getUsername() {
         return username;
     }
@@ -19,24 +19,24 @@ public class SiteUsers {
         this.username = username;
     }
 
-    public SiteUsers() {}
+    public SiteUser() {}
 
-    public SiteUsers(String username, String password) {
+    public SiteUser(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public SiteUsers(String username, String password, List<Habits> habits) {
+    public SiteUser(String username, String password, List<Habit> habits) {
         this.username = username;
         this.password = password;
         this.habits = habits;
     }
 
-    public List<Habits> getHabits() {
+    public List<Habit> getHabits() {
         return habits;
     }
 
-    public void setHabits(List<Habits> habits) {
+    public void setHabits(List<Habit> habits) {
         this.habits = habits;
     }
 

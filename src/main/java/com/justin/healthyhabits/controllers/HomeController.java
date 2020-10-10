@@ -10,8 +10,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(HttpServletRequest request) {
-        String ip = request.getRemoteAddr();
-        System.out.println(ip);
         return "home";
     }
 }

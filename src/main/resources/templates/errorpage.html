@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
     <title>Healthy Habits</title>
@@ -9,7 +9,6 @@
 </head>
 
 <div class="container">
-
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="http://localhost:8082/">HealthyHabits.com</a>
@@ -22,8 +21,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8082/">Home</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8082/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8082/register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8082/habits">Habits</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8082/visualizer">Visualizer</a>
                 </li>
             </ul>
         </div>
@@ -31,23 +39,10 @@
 
     <body>
     <div class="jumbotron">
-        <h1 class="display-4">Login to your account.</h1>
+        <h1 class="display-4">Oops! Something went wrong..</h1>
     </div>
 
-
-    <form action="#" th:action="@{/login}" method="post" th:object="${siteUser}">
-        <div class="form-group">
-            <label for="inputUsername">Username</label>
-            <input type="text" th:field="*{username}" class="form-control" id="inputUsername" required/></p>
-            <label for="inputPassword">Password</label>
-            <input type="password" th:field="*{password}" class="form-control" id="inputPassword" required /></p>
-            <button type="submit" class="btn btn-primary">Login</button>
-
-        </div>
-    </form>
-
     </body>
-
 
 </div>
 

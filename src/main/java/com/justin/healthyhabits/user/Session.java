@@ -8,17 +8,13 @@ public class Session {
     private int sessionId;
     //HttpServletRequest request;
     @OneToOne
-    private SiteUsers siteUser;
-
-    //public HttpServletRequest getRequest() {
-    //    return request;
-    //}
-
-    //public void setRequest(HttpServletRequest request) {
-    //    this.request = request;
-    //}
+    private SiteUser siteUser;
 
     public Session() {}
+
+    public Session(SiteUser user) {
+        this.siteUser = user;
+    }
 
     public int getSessionId() {
         return sessionId;
@@ -28,11 +24,11 @@ public class Session {
         this.sessionId = sessionId;
     }
 
-    public SiteUsers getSiteUser() {
+    public SiteUser getSiteUser() {
         return siteUser;
     }
 
-    public void setSiteUser(SiteUsers siteUser) {
+    public void setSiteUser(SiteUser siteUser) {
         this.siteUser = siteUser;
     }
 }

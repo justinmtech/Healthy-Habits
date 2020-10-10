@@ -1,7 +1,7 @@
 package com.justin.healthyhabits.services;
 
+import com.justin.healthyhabits.repositories.SessionRepository;
 import com.justin.healthyhabits.user.Session;
-import com.justin.healthyhabits.user.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

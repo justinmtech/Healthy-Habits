@@ -3,25 +3,25 @@ package com.justin.healthyhabits.user;
 import javax.persistence.*;
 
 @Entity
-public class Habits {
+public class Habit {
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int habitId;
     private String name;
     private int rating;
     @ManyToOne
-    private SiteUsers siteUsers;
+    private SiteUser siteUser;
 
-    public SiteUsers getSiteUsers() {
-        return siteUsers;
+    public SiteUser getSiteUsers() {
+        return siteUser;
     }
 
-    public void setSiteUsers(SiteUsers siteUsers) {
-        this.siteUsers = siteUsers;
+    public void setSiteUsers(SiteUser siteUser) {
+        this.siteUser = siteUser;
     }
 
-    public Habits() {}
+    public Habit() {}
 
-    public Habits(String name, int rating) {
+    public Habit(String name, int rating) {
         this.name = name;
         this.rating = rating;
     }

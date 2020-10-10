@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.NoSuchElementException;
+
 @Controller
 public class LogoutController {
 
@@ -13,8 +15,13 @@ public class LogoutController {
 
     @GetMapping("/logout")
     public String logout() {
-        int sessionId = sessionService.getAllSessions().stream().findFirst().get().getSessionId();
-        sessionService.deleteSession(sessionId);
+        try {
+            int sessionId = sessionService.getAllSessions().stream().findFirst().orElseThrow().getSessionId();
+            sessionService.deleteSession(sessionId);
+        } catch (NoSuchElementException e) {
+                System.out.println(e.toString());
+                return "errorpage";
+            }
         return "logout";
     }
 

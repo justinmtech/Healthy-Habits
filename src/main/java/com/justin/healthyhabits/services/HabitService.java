@@ -1,7 +1,7 @@
 package com.justin.healthyhabits.services;
 
-import com.justin.healthyhabits.user.HabitRepository;
-import com.justin.healthyhabits.user.Habits;
+import com.justin.healthyhabits.repositories.HabitRepository;
+import com.justin.healthyhabits.user.Habit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,25 +15,25 @@ public class HabitService {
     @Autowired
     HabitRepository habitRepository;
 
-    public List<Habits> getAllHabits() {
-        List<Habits> allHabits = new ArrayList<>();
+    public List<Habit> getAllHabits() {
+        List<Habit> allHabits = new ArrayList<>();
         habitRepository.findAll().forEach(allHabits::add);
         return allHabits;
     }
 
-    public void addHabit(Habits habit) {
+    public void addHabit(Habit habit) {
         habitRepository.save(habit);
     }
 
-    public Optional<Habits> getHabit(int id) {
+    public Optional<Habit> getHabit(int id) {
         return habitRepository.findById(id);
     }
 
-    public void saveHabit(Habits habit) {
+    public void saveHabit(Habit habit) {
         habitRepository.save(habit);
     }
 
-    public void deleteHabit(Habits habit) {
+    public void deleteHabit(Habit habit) {
         habitRepository.delete(habit);
     }
 }

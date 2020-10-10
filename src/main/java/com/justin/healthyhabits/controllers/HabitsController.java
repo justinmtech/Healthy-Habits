@@ -1,10 +1,10 @@
 package com.justin.healthyhabits.controllers;
 
-import com.justin.healthyhabits.services.HabitService;
+import com.justin.healthyhabits.services.DataValidation;
 import com.justin.healthyhabits.services.SessionService;
 import com.justin.healthyhabits.services.UserService;
-import com.justin.healthyhabits.user.Habits;
-import com.justin.healthyhabits.user.SiteUsers;
+import com.justin.healthyhabits.user.Habit;
+import com.justin.healthyhabits.user.SiteUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class HabitsController {
-    private List<Habits> habitList = new ArrayList<>();
+    private static DataValidation parser;
 
     @Autowired
     SessionService sessionService;
@@ -26,43 +24,41 @@ public class HabitsController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    HabitService habitService;
-
     @GetMapping("/habits")
     public String habitForm(Model model) {
-        model.addAttribute("habit", new Habits());
+        model.addAttribute("habit", new Habit());
         return "habitspage";
     }
 
     @PostMapping("/habits")
-    public String habitSubmit(@ModelAttribute Habits habit, Model model) {
+    public String habitSubmit(@ModelAttribute Habit habit, Model model) {
         model.addAttribute("habit", habit);
 
-        //get user based on IP
-        //filter results based on IP
-        getHabitList();
-        addToHabitList(habit);
-        setHabitList(habitList);
+        if (parser.isValid(habit.getName(), 3, 16) &&
+            parser.isValid(habit.getRating(), 0, 10)) {
+                setHabitList(getHabitList());
+                addToHabitList(habit);
+                userService.saveUser(getSiteUser());
+            } else {
+            return "errorpage";
+        }
 
-        habitService.addHabit(habit);
-        userService.saveUser(getSiteUser().get());
         return "habitspage";
     }
 
-    private List<Habits> getHabitList() {
-        return habitService.getAllHabits();
+    private List<Habit> getHabitList() {
+        return getSiteUser().getHabits();
     }
 
-    private void addToHabitList(Habits habit) {
-        habitService.addHabit(habit);
+    private void addToHabitList(Habit habit) {
+        getSiteUser().getHabits().add(habit);
     }
 
-    private Optional<SiteUsers> getSiteUser() {
-        return userService.getAllUsers().stream().findFirst();
+    private SiteUser getSiteUser() {
+        return sessionService.getAllSessions().stream().findFirst().get().getSiteUser();
     }
 
-    private void setHabitList(List<Habits> habitList) {
-        getSiteUser().get().setHabits(habitList);
+    private void setHabitList(List<Habit> habitList) {
+        getSiteUser().setHabits(habitList);
     }
 }
