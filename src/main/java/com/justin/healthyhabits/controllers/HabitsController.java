@@ -63,8 +63,15 @@ public class HabitsController {
         getSiteUser().getHabits().add(habit);
     }
 
-    private User getSiteUser() {
-        return sessionService.getAllSessions().stream().findFirst().get().getSiteUser();
+    private User getSiteUser() throws NoSuchElementException {
+        User user = new User();
+        try {
+            user = sessionService.getAllSessions().stream().findFirst().orElseThrow().getSiteUser();
+        }
+        catch (NoSuchElementException e) {
+            logger.addToLog("User not found", true);
+        }
+        return user;
     }
 
     private void setHabitList(List<Habit> habitList) {

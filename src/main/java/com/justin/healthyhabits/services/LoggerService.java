@@ -2,10 +2,7 @@ package com.justin.healthyhabits.services;
 
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -30,10 +27,8 @@ public class LoggerService {
     private void createFile(boolean error) {
         try {
             File file = new File("src/main/resources/logs/" + date + "-" + isError(error) + ".txt");
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-        } catch (Exception e) {
+            file.createNewFile();
+        } catch (IOException e) {
             System.out.println(e.toString());
         }
     }
