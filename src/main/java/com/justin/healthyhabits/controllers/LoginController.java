@@ -14,10 +14,12 @@ import java.util.NoSuchElementException;
 
 @Controller
 public class LoginController {
-    private Logger logger = new Logger();
 
     @Autowired
-    UserAuthenticator userAuthenticator;
+    LoggerService logger;
+
+    @Autowired
+    UserAuthenticatorService userAuthenticator;
 
     @Autowired
     SessionService sessionService;
@@ -41,7 +43,7 @@ public class LoginController {
             model.addAttribute("user", user);
 
                 User dbUser = userService.getAllUsers().stream().filter(u -> u.getUsername().equals(user.getUsername())).findFirst().orElseThrow();
-                if (userAuthenticator.isAuthenticated(dbUser, dbUser.getPassword(), dbUser.getUsername())) {
+                if (userAuthenticator.isAuthenticated(dbUser)) {
                     Session session = new Session(dbUser);
                     sessionService.saveSession(session);
                     logger.addToLog("Login successful for user " + user.getUsername(), false);

@@ -1,6 +1,6 @@
 package com.justin.healthyhabits.controllers;
 
-import com.justin.healthyhabits.services.Logger;
+import com.justin.healthyhabits.services.LoggerService;
 import com.justin.healthyhabits.services.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,9 @@ import java.util.NoSuchElementException;
 
 @Controller
 public class LogoutController {
-    private final Logger logger = new Logger();
+
+    @Autowired
+    LoggerService logger;
 
     @Autowired
     SessionService sessionService;

@@ -1,7 +1,7 @@
 package com.justin.healthyhabits.controllers;
 
 import com.justin.healthyhabits.services.DataValidation;
-import com.justin.healthyhabits.services.Logger;
+import com.justin.healthyhabits.services.LoggerService;
 import com.justin.healthyhabits.services.SessionService;
 import com.justin.healthyhabits.services.UserService;
 import com.justin.healthyhabits.user.Habit;
@@ -18,7 +18,9 @@ import java.util.NoSuchElementException;
 
 @Controller
 public class HabitsController {
-    private final Logger logger = new Logger();
+
+    @Autowired
+    LoggerService logger;
 
     @Autowired
     SessionService sessionService;

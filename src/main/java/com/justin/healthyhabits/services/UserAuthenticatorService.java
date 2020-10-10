@@ -4,11 +4,11 @@ import com.justin.healthyhabits.user.User;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserAuthenticator {
+public class UserAuthenticatorService {
     private String usernameInput;
     private String passwordInput;
 
-    public UserAuthenticator() {}
+    public UserAuthenticatorService() {}
 
     public void setUsernameInput(String usernameInput) {
         this.usernameInput = usernameInput;
@@ -18,9 +18,7 @@ public class UserAuthenticator {
         this.passwordInput = passwordInput;
     }
 
-    public boolean isAuthenticated(User user, String password, String username) {
-        System.out.println(password);
-        System.out.println(username);
+    public boolean isAuthenticated(User user) {
             if (this.passwordInput.equals(user.getPassword()) && this.usernameInput.equals(user.getUsername())) {
                 System.out.println("True!");
                 return true;

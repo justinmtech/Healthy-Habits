@@ -1,5 +1,7 @@
 package com.justin.healthyhabits.services;
 
+import org.springframework.stereotype.Service;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -7,7 +9,8 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Logger {
+@Service
+public class LoggerService {
     private String time;
     private String date;
 
