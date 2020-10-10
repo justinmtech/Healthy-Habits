@@ -1,6 +1,7 @@
 package com.justin.healthyhabits.controllers;
 
 import com.justin.healthyhabits.services.DataValidation;
+import com.justin.healthyhabits.services.Logger;
 import com.justin.healthyhabits.services.SessionService;
 import com.justin.healthyhabits.services.UserService;
 import com.justin.healthyhabits.user.Habit;
@@ -17,6 +18,7 @@ import java.util.NoSuchElementException;
 
 @Controller
 public class HabitsController {
+    private final Logger logger = new Logger();
 
     @Autowired
     SessionService sessionService;
@@ -39,11 +41,14 @@ public class HabitsController {
                 setHabitList(getHabitList());
                 addToHabitList(habit);
                 userService.saveUser(getSiteUser());
+                logger.addToLog("Habit " + habit.getName() + " added for user " + getSiteUser().getUsername(), false);
                 return "habitspage";
             } else
+                logger.addToLog("Habit Error", true);
                 return "errorpage";
         } catch (NullPointerException | NoSuchElementException e) {
-            System.out.println(e.toString());
+            String error = e.toString();
+            logger.addToLog("Habit Error: " + error, true);
             return "errorpage";
         }
     }

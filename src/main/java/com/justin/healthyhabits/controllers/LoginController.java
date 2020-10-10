@@ -44,15 +44,17 @@ public class LoginController {
                 if (userAuthenticator.isAuthenticated(dbUser, dbUser.getPassword(), dbUser.getUsername())) {
                     Session session = new Session(dbUser);
                     sessionService.saveSession(session);
+                    logger.addToLog("Login successful for user " + user.getUsername(), false);
                     return "loginsuccessful";
                 } else
+                    logger.addToLog("Login failed for username " + user.getUsername(), true);
                     return "errorpage";
         } else
             return "errorpage";
 
         } catch (NoSuchElementException | NullPointerException e) {
             String error = e.toString();
-            logger.addToLog(error);
+            logger.addToLog("Login failed for username " + user.getUsername() + ": " + error, true);
             return "errorpage";
             }
     }
