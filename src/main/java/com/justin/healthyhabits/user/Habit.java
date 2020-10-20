@@ -11,7 +11,8 @@ public class Habit {
     @ManyToOne
     private User user;
 
-    public User getSiteUsers() {
+    public User
+    getSiteUsers() {
         return user;
     }
 
