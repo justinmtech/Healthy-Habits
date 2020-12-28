@@ -37,10 +37,23 @@ public class HabitsController {
     @PostMapping("/habits")
     public String habitSubmit(@ModelAttribute Habit habit, Model model) {
         model.addAttribute("habit", habit);
+        boolean isValid = false;
         try {
-            if (DataValidation.isValid(habit.getName(), 3, 16) &&
-                    DataValidation.isValid(habit.getRating(), 0, 10)) {
+            if (DataValidation.isValid(habit.getName(), 3, 16)) {
+                isValid = true;
+                for (int i = 0; i < habit.getRatings().size(); i++) {
+                    if (isValid == true) {
+                            isValid = DataValidation.isValid(habit.getRatings().get(i), 0, 10);
+                    } else {
+                        continue;
+                    }
+                }
                 setHabitList(getHabitList());
+                for (int i = 0; i < getHabitList().size(); i++) {
+                if (getHabitList().get(i).equals(habit.getName())) {
+                    return "errorpage";
+                    }
+                }
                 addToHabitList(habit);
                 userService.saveUser(getSiteUser());
                 logger.addToLog("Habit " + habit.getName() + " added for user " + getSiteUser().getUsername(), false);

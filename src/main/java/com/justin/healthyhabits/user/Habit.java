@@ -1,30 +1,45 @@
 package com.justin.healthyhabits.user;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Entity
 public class Habit {
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int habitId;
     private String name;
-    private int rating;
+    private ArrayList<Integer> ratings;
     @ManyToOne
     private User user;
+    private LocalDate date;
 
-    public User
-    getSiteUsers() {
+    public Habit(String name, ArrayList<Integer> ratings) {
+        this.name = name;
+        this.ratings = ratings;
+        setDate();
+    }
+
+    public Habit() {
+        setDate();
+        System.out.println(date);
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate() {
+        LocalDate date = LocalDate.now();
+        this.date = date;
+    }
+
+    public User getSiteUsers() {
         return user;
     }
 
     public void setSiteUsers(User user) {
         this.user = user;
-    }
-
-    public Habit() {}
-
-    public Habit(String name, int rating) {
-        this.name = name;
-        this.rating = rating;
     }
 
     public int getHabitId() {
@@ -43,11 +58,11 @@ public class Habit {
         this.name = name;
     }
 
-    public int getRating() {
-        return rating;
+    public ArrayList<Integer> getRatings() {
+        return ratings;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setRatings(ArrayList<Integer> ratings) {
+        this.ratings = ratings;
     }
 }

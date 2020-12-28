@@ -39,6 +39,6 @@ public class VisualizerController {
             logger.addToLog("Visualizer error: " + error, true);
             return "errorpage";
         }
-        return "index";
+        return "graph";
     }
 }

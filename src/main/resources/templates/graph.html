@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>Healthy Habits - Graph</title>
@@ -8,39 +8,94 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 
-    <body>
-    <div class="container">
-        <h2 align="center">Habit Graph</h2>
+    <div class ="container">
 
-        <div id="container"
-             style="width: 550px; height: 400px; margin: 0 auto"></div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="http://localhost:8082/">HealthyHabits.com</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost:8082/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8082/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8082/logout">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8082/register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8082/habits">Habits</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8082/graph">Graph</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="jumbotron">
+            <h1 class="display-4">Visualize your habits.</h1>
+        </div>
+
     </div>
-    <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <body>
+
+    <div class="container" align="center">
+        <div id="container"
+             style="width: 900px; height: 600px; margin: 0 auto"></div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
-    <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script th:inline="javascript">
+    /*<![CDATA[*/
+    var habitList = [[${habitList}]];
+    var habitDataList = [[${habitDataList}]];
+    var habitListLength = habitList.length;
+
+    seriesArray = [];
+
+    for (var i = 0; i < habitListLength; i++) {
+        var habitNameObject = {
+            "name": habitList[i],
+            "data": [habitDataList[i]]
+        };
+        seriesArray.push(habitNameObject);
+    }
+
+    console.log(habitList);
+    console.log(seriesArray);
+
     $(function(){
     Highcharts.chart('container', {
         chart: {
             type: 'line'
         },
         title: {
-            text: 'Habits'
+            text: ''
         },
         subtitle: {
-            text: 'Habit visualizer'
+            text: ''
         },
         xAxis: {
-            categories: ["October", "November", "December"],
-            crosshair: true
+             type: 'datetime',
+             dateTimeLabelFormats: {
+                day: '%m/%d'
+             }
         },
         yAxis: {
             min: 0,
-            max:10,
+            max: 10,
             title: {
                 text: 'Habit Severity'
             }
@@ -59,17 +114,19 @@
                 borderWidth: 0
             }
         },
-        series: [{
-            name: 'Habit',
-            data: [[${habits.values()}]]
-        }]
-    });
+
+        legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top'
+
+      },
+
+        series: seriesArray
+    /*]]>*/
+        });
     });
 </script>
-
     </body>
-
-
-</div>
 
 </html>

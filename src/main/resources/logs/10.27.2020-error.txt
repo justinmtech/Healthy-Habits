@@ -1,0 +1,2 @@
+[03:41:28] Visualizer error: java.util.NoSuchElementException: No value present
+[04:45:54] Visualizer error: java.util.NoSuchElementException: No value present
