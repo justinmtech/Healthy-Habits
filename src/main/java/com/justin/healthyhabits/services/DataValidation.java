@@ -8,7 +8,7 @@ public class DataValidation {
     private static int inputInt;
 
     private static boolean isTooLong(int min, int max) {
-        return inputString.length() < min || inputString.length() > max;
+        return inputString.length() >= min && inputString.length() <= max;
     }
 
     private static boolean isValueTooHigh(int min, int max) {
@@ -18,21 +18,21 @@ public class DataValidation {
     private static boolean hasSpecialCharacters() {
         Pattern acceptableChars = Pattern.compile("[^A-Za-z0-9]", Pattern.CASE_INSENSITIVE);
         Matcher matcher = acceptableChars.matcher(inputString);
-        return matcher.find();
+        return !matcher.find();
     }
 
     public static boolean isValid(String input, int min, int max) {
         DataValidation.inputString = input;
-        return !isTooLong(min, max) && !hasSpecialCharacters();
+        return isTooLong(min, max) && hasSpecialCharacters();
     }
 
     public static boolean isValid(int input, int min, int max) {
         DataValidation.inputInt = input;
-        return !isValueTooHigh(min, max) && !hasSpecialCharacters();
+        return !isValueTooHigh(min, max) && hasSpecialCharacters();
     }
 
     public static boolean isPasswordValid(String input, int min, int max) {
         DataValidation.inputString = input;
-        return !isTooLong(min, max);
+        return isTooLong(min, max);
     }
 }

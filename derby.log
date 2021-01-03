@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Wed Dec 23 13:15:15 CST 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0176-9106-dbc0-0000065d9f60 
-on database directory memory:C:\Users\justi\IdeaProjects\HealthyHabits.com\b42c1626-7f65-4e01-8a96-a03ffb288b34 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2626b418 
+Sun Jan 03 09:35:06 CST 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0176-c8e3-42bb-00000708af70 
+on database directory memory:C:\Users\justi\IdeaProjects\HealthyHabits.com\77d49074-1d7d-453c-b881-0b7e03aa58d6 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2626b418 
 Loaded from file:/C:/Users/justi/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=13.0.1+9

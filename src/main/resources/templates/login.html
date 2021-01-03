@@ -29,6 +29,7 @@
         </div>
     </nav>
 
+    <!--suppress HtmlUnknownTag, HtmlUnknownTag -->
     <body>
     <div class="jumbotron">
         <h1 class="display-4">Login to your account.</h1>
@@ -38,9 +39,9 @@
     <form action="#" th:action="@{/login}" method="post" th:object="${user}">
         <div class="form-group">
             <label for="inputUsername">Username</label>
-            <input type="text" th:field="*{username}" class="form-control" id="inputUsername" required/></p>
+            <input type="text" th:field="*{username}" class="form-control" id="inputUsername" required/>
             <label for="inputPassword">Password</label>
-            <input type="password" th:field="*{password}" class="form-control" id="inputPassword" required /></p>
+            <input type="password" th:field="*{password}" class="form-control" id="inputPassword" required />
             <button type="submit" class="btn btn-primary">Login</button>
 
         </div>

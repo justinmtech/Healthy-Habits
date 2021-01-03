@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+@SuppressWarnings("ALL")
 @Controller
 public class GraphController {
 
@@ -25,7 +23,7 @@ public class GraphController {
         ArrayList<String> habitNames = new ArrayList<>();
         //ArrayList<Integer> habitRatingsData = new ArrayList<>();
         Map<Integer, LocalDate> habitRatingsData = new HashMap<>();
-        User user = sessionService.getAllSessions().stream().findFirst().orElse(null).getSiteUser();
+        User user = Objects.requireNonNull(sessionService.getAllSessions().stream().findFirst().orElse(null)).getSiteUser();
 
         for (int i = 0; i < user.getHabits().size(); i++) {
             habitNames.add(user.getHabits().get(i).getName());

@@ -32,6 +32,7 @@
         </div>
     </nav>
 
+    <!--suppress HtmlUnknownTag, HtmlUnknownTag -->
     <body>
     <div class="jumbotron" id="jumbotron">
         <h1 class="display-4"> Register now to begin!</h1>
@@ -41,9 +42,9 @@
     <form action="#" th:action="@{/register}" method="post" th:object="${user}">
         <div class="form-group">
             <label for="inputUsername">Username</label>
-            <input type="text" th:field="*{username}" class="form-control" id="inputUsername" required minlength="3" maxlength="16"/></p>
+            <input type="text" th:field="*{username}" class="form-control" id="inputUsername" required minlength="3" maxlength="16"/>
             <label for="inputPassword">Password</label>
-            <input type="password" th:field="*{password}" class="form-control" id="inputPassword" required minlength="7" maxlength="256"/></p>
+            <input type="password" th:field="*{password}" class="form-control" id="inputPassword" required minlength="7" maxlength="256"/>
             <button type="submit" class="btn btn-primary">Create Account</button>
         </div>
     </form>

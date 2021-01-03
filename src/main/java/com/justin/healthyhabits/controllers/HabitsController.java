@@ -28,6 +28,7 @@ public class HabitsController {
     @Autowired
     UserService userService;
 
+    @SuppressWarnings("SameReturnValue")
     @GetMapping("/habits")
     public String habitForm(Model model) {
         model.addAttribute("habit", new Habit());
@@ -37,15 +38,13 @@ public class HabitsController {
     @PostMapping("/habits")
     public String habitSubmit(@ModelAttribute Habit habit, Model model) {
         model.addAttribute("habit", habit);
-        boolean isValid = false;
+        boolean isValid;
         try {
             if (DataValidation.isValid(habit.getName(), 3, 16)) {
                 isValid = true;
                 for (int i = 0; i < habit.getRatings().size(); i++) {
-                    if (isValid == true) {
+                    if (isValid) {
                             isValid = DataValidation.isValid(habit.getRatings().get(i), 0, 10);
-                    } else {
-                        continue;
                     }
                 }
                 setHabitList(getHabitList());

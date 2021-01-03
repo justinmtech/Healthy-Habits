@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+@SuppressWarnings("unused")
 @Entity
 public class Habit {
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -30,8 +31,7 @@ public class Habit {
     }
 
     public void setDate() {
-        LocalDate date = LocalDate.now();
-        this.date = date;
+        this.date = LocalDate.now();
     }
 
     public User getSiteUsers() {
