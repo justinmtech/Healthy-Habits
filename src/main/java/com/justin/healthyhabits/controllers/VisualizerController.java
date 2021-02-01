@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.NoSuchElementException;
 
-//TODO Figure out how to add graphs to display the habits.
-
 @Controller
 public class VisualizerController {
 

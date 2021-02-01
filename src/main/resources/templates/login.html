@@ -1,55 +1,75 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
     <title>Healthy Habits</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
-
-<div class="container">
-
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="http://localhost:8082/">HealthyHabits.com</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8082/">Home</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="http://localhost:8082/login">Login</a>
-                </li>
-            </ul>
+<body>
+        <div class="navbar">
+            <div class="navbar-left">
+                    <div class="navbar-items">
+                        <div class="navbar-item-active">
+                            <a class="navbar-link" href="http://localhost:8082/home">Home</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a class="nav-link" href="http://localhost:8082/habits">My Habits</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a class="nav-link" href="http://localhost:8082/graph">Visualizer</a>
+                        </div>
+                    </div>
+            </div>
+            <div class="navbar-right">
+                <div class="dropdown">
+                    <div class="navbar-items">
+                        <div class="navbar-item">
+                            <a class="navbar-link" href="">Account</a>
+                        </div> 
+                    <div class="dropdown-content">
+                        <a href="http://localhost:8082/login">Login</a>
+                        <a href="http://localhost:8082/logout">Logout</a>
+                        <a href="http://localhost:8082/register">Register</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
+        <div class="content-wrapper">           
+            <div class="section" id="header">
+                <div class="section-img" id="img-header" style="background-image: url(images/cover2.jpg)"></div>                 
+                    <h1>Login</h1>
+                        <div class="section-text" id="header-text">
+                            <h3>Welcome back!</h3>
+                        </div>
+            </div>
+            <div class="section" id="about">
+                    <h1>Enter your username and password to login..</h1>
+                <div class="section-text" id="about-text">
+                    <p>Username</p>
+                    <p>Password</p>
+                </div>
+            </div>
 
-    <!--suppress HtmlUnknownTag, HtmlUnknownTag -->
-    <body>
-    <div class="jumbotron">
-        <h1 class="display-4">Login to your account.</h1>
-    </div>
+            <div class="footer">
+                    <div class="footer-content">
+                        <div class="footer-links">
+                            <div class="footer-items"> 
+                                <a class="footer-link" href="http://localhost:8082/logout">About</a> 
+                                <a class="footer-link" href="http://localhost:8082/logout">About</a>                                                                                              
+                                <a class="footer-link" href="http://localhost:8082/logout">About</a>
+                                <a class="footer-link" href="http://localhost:8082/logout">About</a>                                                                    
 
-
-    <form action="#" th:action="@{/login}" method="post" th:object="${user}">
-        <div class="form-group">
-            <label for="inputUsername">Username</label>
-            <input type="text" th:field="*{username}" class="form-control" id="inputUsername" required/>
-            <label for="inputPassword">Password</label>
-            <input type="password" th:field="*{password}" class="form-control" id="inputPassword" required />
-            <button type="submit" class="btn btn-primary">Login</button>
-
+                                <div class="footer-copyright">
+                                <p>Copyright © 2021 Justin Mitchell</p> 
+                            </div>                            
+                        
+                            </div>
+                        </div>
+                    </div>
+            </div>
         </div>
-    </form>
-
     </body>
-
-
-</div>
-
 </html>

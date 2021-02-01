@@ -1,58 +1,88 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
-    <title>Healthy Habits - Habits</title>
+    <title>Healthy Habits</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
-
-<div class="container">
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="http://localhost:8082/">HealthyHabits.com</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8082/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8082/logout">Logout</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="http://localhost:8082/habits">Habits</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8082/graph">Graph</a>
-                </li>
-            </ul>
+<body>
+        <div class="navbar">
+            <div class="navbar-left">
+                    <div class="navbar-items">
+                        <div class="navbar-item">
+                            <a class="navbar-link" href="http://localhost:8082/">Home</a>
+                        </div>
+                        <div class="navbar-item-active">
+                            <a class="nav-link" href="http://localhost:8082/habits">My Habits</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a class="nav-link" href="http://localhost:8082/graph">Visualizer</a>
+                        </div>
+                    </div>
+            </div>
+            <div class="navbar-right">
+                <div class="dropdown">
+                    <div class="navbar-items">
+                        <div class="navbar-item">
+                            <a class="navbar-link" href="">Account</a>
+                        </div> 
+                    <div class="dropdown-content">
+                        <a href="login.html">Login</a>
+                        <a href="logout.html">Logout</a>                       
+                        <a href="register.html">Register</a>                        
+                    </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
+        <div class="content-wrapper">           
+            <div class="section" id="header">
+                <div class="section-img" id="img-header" style="background-image: url(images/cover2.jpg)"></div>
+                    <h1>Habits</h1>
+                        <div class="section-text" id="header-text">
+                            <h3>Add or remove habits to track..</h3>
+                        </div>
+            </div>
+            <div class="section">
+                    <h1>Add new habit..</h1>
+                <div class="section-text">
+                    <p>Habit Name</p>
+                    <p>Habit Severity</p>
+                </div>
+            </div>
 
-    <!--suppress HtmlUnknownTag, HtmlUnknownTag -->
-    <body>
-    <div class="jumbotron">
-        <h1 class="display-4">Add habits you want to curb here!</h1>
-    </div>
+            <div class="section">
+                    <h1>Modify existing habits..</h1>
+                <div class="section-text">
+                    <p>Habit List</p>
+                    <p>Habit List</p>
+                    <p>Habit List</p>
+                    <p>Habit List</p>
+                    <p>Habit List</p>
+                    <p>Habit List</p>                                                                                                    
 
-    <form action="#" th:action="@{/habits}" method="post" th:object="${habit}">
-        <div class="form-group">
-            <label for="inputHabitName">Habit Name </label>
-            <input type="text" th:field="*{name}" class="form-control" id="inputHabitName" required minlength="3" maxlength="12"/>
-            <label for="inputHabitRating">Habit Rating </label>
-            <input type="text" th:field="*{rating}" class="form-control" id="inputHabitRating" required aria-valuemin="0" aria-valuemax="10"/>
-            <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>            
+
+            <div class="footer">
+                    <div class="footer-content">
+                        <div class="footer-links">
+                            <div class="footer-items"> 
+                                <a class="footer-link" href="http://localhost:8082/logout">About</a> 
+                                <a class="footer-link" href="http://localhost:8082/logout">About</a>                                                                                              
+                                <a class="footer-link" href="http://localhost:8082/logout">About</a>
+                                <a class="footer-link" href="http://localhost:8082/logout">About</a>                                                                    
+
+                                <div class="footer-copyright">
+                                <p>Copyright © 2021 Justin Mitchell</p> 
+                            </div>                            
+                        
+                            </div>
+                        </div>
+                    </div>
+            </div>
         </div>
-    </form>
-
     </body>
-
-
-</div>
-
 </html>

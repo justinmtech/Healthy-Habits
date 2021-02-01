@@ -1,2 +1,0 @@
-[01:15:21] Registration successful for user justinmate
-[01:15:24] Login successful for user justinmate

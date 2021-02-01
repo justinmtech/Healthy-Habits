@@ -1,0 +1,288 @@
+html * {
+	font-family: arial;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: arial;
+}
+
+.navbar {
+	top: 0;
+	background-color: #59C149;
+	color: white;
+	height: 64px;
+	position: relative;
+}
+
+.navbar-left {
+	float: left;
+	position: absolute;
+	top: 30%;
+	left: 0;
+}
+
+.navbar-right {
+	float: right;
+	position: absolute;
+	top: 30%;
+	right: 5%;
+}
+
+.navbar-brand {
+	float: left;
+	color: white;
+	text-transform: uppercase;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 32px;
+}
+
+.navbar-link {
+	text-decoration: none;
+	color: white;
+}
+
+.navbar-item a {
+	color: white;
+	text-decoration: none;
+	padding: 24px;
+}
+
+.navbar-items {
+	float: left;
+	display: flex;
+	justify-content: space-between;
+	color: white;
+	text-decoration: none;
+	font-size: 24px;
+	text-transform: uppercase;
+}
+
+.navbar-item-active a {
+	background-color: darkgreen;
+	color: white;
+	text-decoration: none;
+	text-transform: uppercase;
+	padding: 24px;
+}
+
+.navbar-item a:hover {
+	background-color: #29a329;
+	transition-duration: 0.3s;
+}
+
+.section-button-item {
+	text-decoration: none;
+}
+
+.section-button-link {
+	text-decoration: none;
+	color: white;
+	padding: 24px;
+}
+
+.section {
+	position: relative;
+}
+
+.section-img {
+	width: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed; 
+}
+
+#header {
+	height: 750px;
+}
+
+#img-header {
+	height: 750px;
+}
+
+#register {
+	height: 750px;
+}
+
+#about {
+	height: 1100px;
+}
+
+#register-img {
+	height: 500px;
+}
+
+.section h1 {
+	font-size: 48px;
+	text-align: center;
+	color: white;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+}
+
+#header h1 {
+	top: 35%;
+	font-size: 96px;
+}
+
+#about h1 {
+	top: 15%;
+	text-decoration: underline;
+}
+
+#register h1 {
+	top: 20%;
+	left: 60%;
+	text-decoration: underline;
+	text-align: left;
+}
+
+#header-text {
+	top: 60%;
+}
+
+#about-text {
+	top: 50%;
+}
+
+#register-text {
+	top: 60%;
+	left: 35%;
+	text-align: left;
+}
+
+.section-button {
+	font-size: 32px;
+	font-weight: 600;
+	top: 40%;
+	left: 50%;
+	position: absolute;
+	text-transform: uppercase;
+	text-decoration: none;
+	padding: 24px;
+	border-radius: 6px;
+	background-color: darkgreen;
+}
+
+.section-button:hover {
+	transition-duration: 0.1s;
+	background-color: orange;
+}
+
+.section-text {
+	font-weight: 600;
+	text-align: center;
+	position: absolute;
+	top: 60%;
+	transform: translate(-50%, -50%);
+	left: 50%;
+	color: white;
+	width: 50%;
+	font-size: 24px;
+}
+
+#header {
+	color: white;
+}
+
+#about h1 {
+	color: #59C149;
+}
+
+
+#about p {
+	color: black;
+	border: 2px solid #59C149;
+	padding: 64px;
+}
+
+#register {
+	color: white;
+	height: 500px;
+}
+
+.footer {
+	bottom: 0;
+	background-color: #59C149;
+	height: 128px;
+	position: relative;
+}
+
+.footer-items {
+	color: white;
+}
+
+.footer-content {
+	text-align: center;
+	position: absolute;
+	top: 60%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+}
+
+.footer-links {
+	text-decoration: none;
+	color: white;
+	display: flex;
+	justify-content: space-between;
+}
+
+.footer-link {
+	text-decoration: none;
+	color: white;
+	text-transform: uppercase;	
+	margin-right: 12px;
+	margin-left: 12px;
+	font-size: 24px;
+	height: 16px;
+}
+
+.footer-copyright {
+	font-size: 12px;
+	color: black;
+}
+
+.footer-items a:hover {
+	color: black;
+	border-bottom: 1px solid black;
+	transition-duration: 0.5s;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #59C149;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.6);
+  top: 99%;
+  z-index: 1;
+  text-decoration: none;
+}
+
+.dropdown:hover .dropdown-content {
+  animation-delay: 1s;
+  transition-duration: 1s;
+  display: block;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 24px 24px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #29a329}
+
+.dropdown:hover .dropbtn {
+  background-color: #29a329;
+}

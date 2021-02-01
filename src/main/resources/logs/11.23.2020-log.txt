@@ -1,3 +1,0 @@
-[01:29:44] Registration successful for user justinmate
-[01:29:45] Login successful for user justinmate
-[01:29:48] Habit Blue added for user justinmate

@@ -1,132 +1,153 @@
 <!DOCTYPE html>
 
+<html>
+
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Healthy Habits - Graph</title>
+    <title>Healthy Habits</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
-
-    <div class ="container">
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="http://localhost:8082/">HealthyHabits.com</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="http://localhost:8082/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8082/login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8082/logout">Logout</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8082/register">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8082/habits">Habits</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8082/graph">Graph</a>
-                    </li>
-                </ul>
+<body>
+        <div class="navbar">
+            <div class="navbar-left">
+                    <div class="navbar-items">
+                        <div class="navbar-item">
+                            <a class="navbar-link" href="http://localhost:8082">Home</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a class="nav-link" href="http://localhost:8082/habits">My Habits</a>
+                        </div>
+                        <div class="navbar-item-active">
+                            <a class="nav-link" href="http://localhost:8082/graph">Visualizer</a>
+                        </div>
+                    </div>
             </div>
-        </nav>
-
-        <div class="jumbotron">
-            <h1 class="display-4">Visualize your habits.</h1>
+            <div class="navbar-right">
+                <div class="dropdown">
+                    <div class="navbar-items">
+                        <div class="navbar-item">
+                            <a class="navbar-link" href="http://localhost:8082/">Account</a>
+                        </div> 
+                    <div class="dropdown-content">
+                        <a href="login.html">Login</a>
+                        <a href="logout.html">Logout</a>                       
+                        <a href="register.html">Register</a>                      
+                    </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="content-wrapper">           
+            <div class="section" id="header">
+                <div class="section-img" id="img-header" style="background-image: url(images/cover2.jpg)"></div>                 
+                    <h1>Visualizer</h1>
+                        <div class="section-text" id="header-text">
+                            <h3>Track your habits!</h3>
+                        </div>
+            </div>
+            <div class="section" id="about">
+                    <h1>My Habit Graph</h1>
+                <div class="section-content" id="habit-graph">
+                    <div class="graph-container" align="center">
+                        <div id="graph-container" style="width: 900px; height: 600px; margin: 0 auto"></div>
+                    </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <!-- Latest compiled and minified JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script src="https://code.highcharts.com/highcharts.js"></script>
+            <script src="https://code.highcharts.com/modules/exporting.js"></script>
+            <script th:inline="javascript">
+            /*<![CDATA[*/
+                var habitList = [[${habitList}]];
+                var habitDataList = [[${habitDataList}]];
+                var habitListLength = habitList.length;
+            /*]]>*/
 
-    </div>
+            seriesArray = [];
 
-    <body>
-
-    <div class="container" align="center">
-        <div id="container"
-             style="width: 900px; height: 600px; margin: 0 auto"></div>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script th:inline="javascript">
-    /*<![CDATA[*/
-    var habitList = [[${habitList}]];
-    var habitDataList = [[${habitDataList}]];
-    var habitListLength = habitList.length;
-    /*]]>*/
-
-    seriesArray = [];
-
-    for (var i = 0; i < habitListLength; i++) {
-        var habitNameObject = {
-            "name": habitList[i],
-            "data": [habitDataList[i]]
-        };
-        seriesArray.push(habitNameObject);
-    }
-
-    console.log(habitList);
-    console.log(seriesArray);
-
-    $(function(){
-    Highcharts.chart('container', {
-        chart: {
-            type: 'line'
-        },
-        title: {
-            text: ''
-        },
-        subtitle: {
-            text: ''
-        },
-        xAxis: {
-             type: 'datetime',
-             dateTimeLabelFormats: {
-                day: '%m/%d'
-             }
-        },
-        yAxis: {
-            min: 0,
-            max: 10,
-            title: {
-                text: 'Habit Severity'
+            for (var i = 0; i < habitListLength; i++) {
+                var habitNameObject = {
+                    "name": habitList[i],
+                    "data": [habitDataList[i]]
+                };
+                seriesArray.push(habitNameObject);
             }
-        },
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y}/10</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-            }
-        },
 
-        legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top'
+            console.log(habitList);
+            console.log(seriesArray);
 
-      },
+            $(function(){
+            Highcharts.chart('graph-container', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: ''
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                     type: 'datetime',
+                     dateTimeLabelFormats: {
+                        day: '%m/%d'
+                     }
+                },
+                yAxis: {
+                    min: 0,
+                    max: 10,
+                    title: {
+                        text: 'Habit Severity'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y}/10</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
 
-        series: seriesArray
-        });
-    });
-</script>
+                legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top'
+
+              },
+
+                series: seriesArray
+                });
+            });
+        </script>
+                </div>
+            </div>
+
+            <div class="footer">
+                    <div class="footer-content">
+                        <div class="footer-links">
+                            <div class="footer-items"> 
+                                <a class="footer-link" href="http://localhost:8082/logout">About</a> 
+                                <a class="footer-link" href="http://localhost:8082/logout">About</a>                                                                                              
+                                <a class="footer-link" href="http://localhost:8082/logout">About</a>
+                                <a class="footer-link" href="http://localhost:8082/logout">About</a>                                                                    
+
+                                <div class="footer-copyright">
+                                <p>Copyright © 2021 Justin Mitchell</p> 
+                            </div>                            
+                        
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
     </body>
-
 </html>

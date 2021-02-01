@@ -38,7 +38,7 @@ public class HabitsController {
     @PostMapping("/habits")
     public String habitSubmit(@ModelAttribute Habit habit, Model model) {
         model.addAttribute("habit", habit);
-        boolean isValid;
+        boolean isValid = false;
         try {
             if (DataValidation.isValid(habit.getName(), 3, 16)) {
                 isValid = true;
