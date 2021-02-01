@@ -2,6 +2,8 @@
 
 <html>
 
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <title>Healthy Habits</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -27,12 +29,12 @@
                     <div class="navbar-items">
                         <div class="navbar-item">
                             <a class="navbar-link" href="">Account</a>
-                        </div> 
-                    <div class="dropdown-content">
-                        <a href="login.html">Login</a>
-                        <a href="logout.html">Logout</a>                       
-                        <a href="register.html">Register</a>                        
-                    </div>
+                        </div>
+                        <div class="dropdown-content">
+                            <a href="http://localhost:8082/login">Login</a>
+                            <a href="http://localhost:8082/logout">Logout</a>
+                            <a href="http://localhost:8082/register">Register</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,23 +50,17 @@
             <div class="section">
                     <h1>Add new habit..</h1>
                 <div class="section-text">
-                    <p>Habit Name</p>
-                    <p>Habit Severity</p>
+                    <form action="#" th:action="@{/habits}" method="post" th:object="${habit}">
+                        <div class="form-group">
+                            <label for="inputHabitName">Habit Name </label>
+                            <input type="text" th:field="*{name}" class="form-control" id="inputHabitName" required minlength="3" maxlength="12"/>
+                            <label for="inputHabitRating">Habit Rating </label>
+                            <input type="text" th:field="*{ratings}" class="form-control" id="inputHabitRating" required aria-valuemin="0" aria-valuemax="10"/>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-
-            <div class="section">
-                    <h1>Modify existing habits..</h1>
-                <div class="section-text">
-                    <p>Habit List</p>
-                    <p>Habit List</p>
-                    <p>Habit List</p>
-                    <p>Habit List</p>
-                    <p>Habit List</p>
-                    <p>Habit List</p>                                                                                                    
-
-                </div>
-            </div>            
 
             <div class="footer">
                     <div class="footer-content">

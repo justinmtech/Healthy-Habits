@@ -2,6 +2,8 @@
 
 <html>
 
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <title>Healthy Habits</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -48,8 +50,16 @@
             <div class="section" id="about">
                     <h1>Enter your username and password to login..</h1>
                 <div class="section-text" id="about-text">
-                    <p>Username</p>
-                    <p>Password</p>
+                    <form action="#" th:action="@{/login}" method="post" th:object="${user}">
+                        <div class="form-group">
+                            <label for="inputUsername">Username</label>
+                            <input type="text" th:field="*{username}" class="form-control" id="inputUsername" required/>
+                            <label for="inputPassword">Password</label>
+                            <input type="password" th:field="*{password}" class="form-control" id="inputPassword" required />
+                            <button type="submit" class="btn btn-primary">Login</button>
+
+                        </div>
+                    </form>
                 </div>
             </div>
 
