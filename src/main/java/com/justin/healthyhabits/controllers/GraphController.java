@@ -20,37 +20,44 @@ public class GraphController {
 
     @GetMapping("/graph")
     public String graph(Model model) {
-        ArrayList<String> habitNames = new ArrayList<>();
-        //ArrayList<Integer> habitRatingsData = new ArrayList<>();
-        Map<Integer, LocalDate> habitRatingsData = new HashMap<>();
+        ArrayList<String> habitList = new ArrayList<>();
+        Map<Long, Integer> habitDataList = new HashMap<Long, Integer>();
+        ArrayList<ArrayList<Object>> habitDataList2 = new ArrayList();
         User user = Objects.requireNonNull(sessionService.getAllSessions().stream().findFirst().orElse(null)).getSiteUser();
 
         for (int i = 0; i < user.getHabits().size(); i++) {
-            habitNames.add(user.getHabits().get(i).getName());
-            //habitRatingsData.add(user.getHabits().get(i).getRatings().get(i));
-            habitRatingsData.put(user.getHabits().get(i).getRatings().get(i), user.getHabits().get(i).getDate());
+            habitList.add(user.getHabits().get(i).getName());
+            habitDataList2.add(new ArrayList<>(Arrays.asList(user.getHabits().get(i).getDate(), user.getHabits().get(i).getRatings().get(0))));
         }
 
-        habitNames.add("Test");
-        habitRatingsData.put(10, LocalDate.of(2020, 12, 21));
+        //habitList.add("Test");
+        //habitList.add("Test2");
 
-        model.addAttribute("habitList", habitNames);
-        model.addAttribute("habitDataList", habitRatingsData);
+        //habitDataList.put(15000000000L, 2);
+        //habitDataList.put(15500000000L, 5);
+
+        //habitDataList2.add(new ArrayList<>(Arrays.asList(15000000000L, 2)));
+        //habitDataList2.add(new ArrayList<>(Arrays.asList(15500000000L, 5)));
+
+        System.out.println(habitDataList2);
+
+        model.addAttribute("habitList", habitList);
+        model.addAttribute("habitDataList", habitDataList2);
 
         return "graph";
     }
 
     private String getDate() {
         LocalDate now = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
-        return formatter.format(now);
+        String date = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        return date;
     }
 
     private List<String> getGraphTimeline() {
         LocalDate start = LocalDate.now().minusWeeks(2);
         LocalDate now = LocalDate.now();
         LocalDate end = LocalDate.now().plusWeeks(2);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
         List<String> timeline = new ArrayList<>();
         timeline.add(start.format(formatter));

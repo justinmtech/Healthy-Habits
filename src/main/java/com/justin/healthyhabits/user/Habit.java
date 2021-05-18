@@ -1,7 +1,6 @@
 package com.justin.healthyhabits.user;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 @SuppressWarnings("unused")
@@ -11,9 +10,9 @@ public class Habit {
     private int habitId;
     private String name;
     private ArrayList<Integer> ratings;
+    private long date;
     @ManyToOne
     private User user;
-    private LocalDate date;
 
     public Habit(String name, ArrayList<Integer> ratings) {
         this.name = name;
@@ -23,15 +22,18 @@ public class Habit {
 
     public Habit() {
         setDate();
-        System.out.println(date);
     }
 
-    public LocalDate getDate() {
+    public Long getDate() {
         return date;
     }
 
     public void setDate() {
-        this.date = LocalDate.now();
+        //LocalDate date = LocalDate.now();
+        this.date = java.lang.System.currentTimeMillis();
+        //date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss"));
+        //Timestamp timestamp = Timestamp.valueOf(String.valueOf(date));
+        //System.out.println(Long.parseLong(timestamp.toString()));
     }
 
     public User getSiteUsers() {
