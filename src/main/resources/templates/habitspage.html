@@ -47,14 +47,14 @@
                             <h3>Add or remove habits to track..</h3>
                         </div>
             </div>
-            <div class="section">
-                    <h1>Add new habit..</h1>
-                <div class="section-text">
+            <div class="section" id="about">
+                    <h1>ADD HABIT</h1>
+                <div class="section-text" id="about-text-habits">
                     <form action="#" th:action="@{/habits}" method="post" th:object="${habit}">
                         <div class="form-group">
-                            <label for="inputHabitName">Habit Name </label>
+                            <label for="inputHabitName">Name </label>
                             <input type="text" th:field="*{name}" class="form-control" id="inputHabitName" required minlength="3" maxlength="12"/>
-                            <label for="inputHabitRating">Habit Rating </label>
+                            <label for="inputHabitRating">Rating </label>
                             <input type="text" th:field="*{ratings}" class="form-control" id="inputHabitRating" required aria-valuemin="0" aria-valuemax="10"/>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
