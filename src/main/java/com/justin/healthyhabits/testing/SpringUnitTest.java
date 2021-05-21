@@ -14,6 +14,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -70,5 +74,35 @@ public class SpringUnitTest {
     @Test
     public void habitsControllerLoads() throws Exception {
         assertThat(habitsController).isNotNull();
+    }
+
+    @Test
+    public void doesThisReturnNull() throws Exception {
+        userService.addUser(new User("Bob2", "password2"));
+        List<String> habitList = new ArrayList<>();
+        Map<Long, Integer> habitDataList = new HashMap<>();
+        List<List<Object>> habitDataList2 = new ArrayList();
+        User user = Objects.requireNonNull(sessionService.getAllSessions().stream().findFirst().orElse(null)).getSiteUser();
+
+        try {
+            for (int i = 0; i < user.getHabits().size(); i++) {
+                habitList.add(user.getHabits().get(i).getName());
+                ArrayList habitData = new ArrayList();
+                for (int j = 0; j < user.getHabits().get(i).getDates().size(); j++) {
+                    String date = user.getHabits().get(i).getDates().get(j);
+                    long dateInMilliseconds = convertDateToMilliseconds(date);
+                    habitData.add(dateInMilliseconds);
+                    habitData.add(user.getHabits().get(i).getRatings().get(j));
+                }
+                habitDataList2.add(habitData);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getCause());
+        }
+    }
+
+    private long convertDateToMilliseconds(String date) throws ParseException {
+        Date newDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        return newDate.getTime();
     }
 }

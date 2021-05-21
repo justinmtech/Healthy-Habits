@@ -1,0 +1,8 @@
+[01:58:21] Habit Error: java.lang.NullPointerException
+[02:31:31] Habit Error: java.lang.NullPointerException
+[02:50:06] HabitsController Error: java.lang.NullPointerException
+[02:51:13] HabitsController Error: java.lang.NullPointerException
+[03:08:02] HabitsController Error: java.lang.NullPointerException
+[06:33:15] HabitsController Error: java.lang.NullPointerException
+[06:35:03] HabitsController Catch Error: java.lang.NullPointerException
+[06:44:27] HabitsController Catch Error: java.lang.NullPointerException

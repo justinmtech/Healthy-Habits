@@ -50,8 +50,7 @@ public class LoginController {
                     return "loginsuccessful";
                 } else
                     logger.addToLog("Login failed for username " + user.getUsername(), true);
-                    return "errorpage";
-        } else
+        }
             return "errorpage";
 
         } catch (NoSuchElementException | NullPointerException e) {
