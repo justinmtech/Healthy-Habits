@@ -18,8 +18,8 @@ import java.util.NoSuchElementException;
 @SuppressWarnings("ALL")
 @Controller
 public class GraphController {
-    private List<String> habitList = new ArrayList<>();
-    private List<List<Object>> habitDataList2 = new ArrayList();
+    private List<String> habitList;
+    private List<List<Object>> habitDataList2;
     //private Map<Long, Integer> habitDataList = new HashMap<Long, Integer>();
 
     @Autowired
@@ -30,6 +30,8 @@ public class GraphController {
 
     @GetMapping("/graph")
     public String graph(Model model) throws ParseException {
+        habitList = new ArrayList<>();
+        habitDataList2 = new ArrayList<>();
         getUserHabitInfo();
         addModelAttributes(model);
         return "graph";

@@ -53,6 +53,16 @@ public class SpringUnitTest {
     }
 
     @Test
+    public void habitForm() {
+
+    }
+
+    @Test
+    public void habitSubmit() {
+
+    }
+
+    @Test
     public void registerUserSucceeds() throws Exception {
         userService.addUser(new User("Bob", "password"));
         userService.addUser(new User("Bob2", "password2"));

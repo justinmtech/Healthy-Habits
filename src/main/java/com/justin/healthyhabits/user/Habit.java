@@ -12,8 +12,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Entity
 public class Habit {
-    //private int habitId;
-    @Id //@GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id
     private String name;
     private ArrayList<Integer> ratings;
     private ArrayList<String> dates;

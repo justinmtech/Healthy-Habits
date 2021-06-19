@@ -50,8 +50,8 @@ public class HabitsController {
                 userService.saveUser(getSiteUser());
             }
         } catch (NullPointerException | NoSuchElementException e) {
-            System.out.println(e.toString());
-            System.out.println(e.getCause());
+            System.out.println("HabitController Habit Submit Error: " + e.toString());
+            System.out.println("HabitController Habit Submit Error: " + e.getCause());
             logger.addToLog("HabitsController Catch Error: " + e.toString(), true);
             return "errorpage";
         }
@@ -77,8 +77,7 @@ public class HabitsController {
     }
 
     private void AddHabitToUser(Habit habit) {
-        //habit.addDate(getDate());
-        habit.setDates(new ArrayList<>(Arrays.asList("05/20/2021")));
+        habit.setDates(new ArrayList<>(Arrays.asList(getDate())));
         getSiteUser().getHabits().add(habit);
         logger.addToLog("Habit " + habit.getName() + " added for user " + getSiteUser().getUsername(), false);
     }
