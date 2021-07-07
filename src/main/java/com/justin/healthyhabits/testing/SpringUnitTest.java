@@ -99,9 +99,9 @@ public class SpringUnitTest {
                 habitList.add(user.getHabits().get(i).getName());
                 ArrayList habitData = new ArrayList();
                 for (int j = 0; j < user.getHabits().get(i).getDates().size(); j++) {
-                    String date = user.getHabits().get(i).getDates().get(j);
-                    long dateInMilliseconds = convertDateToMilliseconds(date);
-                    habitData.add(dateInMilliseconds);
+                    long date = user.getHabits().get(i).getDates().get(j);
+                    //long dateInMilliseconds = convertDateToMilliseconds(date);
+                    habitData.add(date);
                     habitData.add(user.getHabits().get(i).getRatings().get(j));
                 }
                 habitDataList2.add(habitData);

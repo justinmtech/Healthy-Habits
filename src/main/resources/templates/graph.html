@@ -63,21 +63,29 @@
                 var habitList = [[${habitList}]];
                 var habitAmount = habitList.length;
                 var habitDataList = [[${habitDataList}]];
+                var habitDataLength = habitDataList.length;
+                var dataTest = [];
+
             /*]]>*/
+
+             for (var i = 0; i < habitDataLength; i++) {
+                var habitDataArray = [
+                dataTest.push(habitDataList[i])
+                ];
+             }
 
             seriesArray = [];
 
             for (var i = 0; i < habitAmount; i++) {
                 var habitNameObject = {
                     "name": habitList[i],
-                    "data": [habitDataList[i]]
+                    "data": dataTest
                 };
                 seriesArray.push(habitNameObject);
             }
 
-            console.log(habitDataList[0]);
-            console.log(habitDataList[1]);
             console.log(seriesArray);
+            console.log(dataTest);
 
             $(function(){
             Highcharts.chart('graph-container', {
@@ -95,9 +103,9 @@
                      title: {
                         text: 'Day of Month'
                      },
-                     dateTimeLabelFormats: {
-                        day: '%b/%e/%Y'
-                        }
+                     labels: {
+                        format: '{value:%b %e %l}'
+                    }
                 },
                 yAxis: {
                     min: 0,

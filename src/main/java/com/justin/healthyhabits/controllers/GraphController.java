@@ -19,7 +19,8 @@ import java.util.NoSuchElementException;
 @Controller
 public class GraphController {
     private List<String> habitList;
-    private List<List<Object>> habitDataList2;
+    private List<ArrayList<Integer>> habitDataList2;
+    //private List<List> habitData;
     //private Map<Long, Integer> habitDataList = new HashMap<Long, Integer>();
 
     @Autowired
@@ -42,15 +43,19 @@ public class GraphController {
             User user = getSiteUser();
             for (int i = 0; i < user.getHabits().size(); i++) {
                 habitList.add(user.getHabits().get(i).getName());
-                ArrayList habitData = new ArrayList();
                 for (int j = 0; j < user.getHabits().get(i).getDates().size(); j++) {
-                    String date = user.getHabits().get(i).getDates().get(j);
-                    long dateInMilliseconds = convertDateToMilliseconds(date);
-                    habitData.add(dateInMilliseconds);
-                    habitData.add(user.getHabits().get(i).getRatings().get(j));
-                }
+                    ArrayList habitData = new ArrayList();
+                    long date = user.getHabits().get(i).getDates().get(j);
+                    int rating = user.getHabits().get(i).getRatings().get(j);
+                    habitData.add(date);
+                    habitData.add(rating);
+                //ArrayList dataTest = new ArrayList();
+                //dataTest.add(habitData);
                 habitDataList2.add(habitData);
+                }
+                System.out.println(habitDataList2);
             }
+            //habitData.add(habitDataList2);
         } catch (Exception e) {
             System.out.println(e.getCause());
         }

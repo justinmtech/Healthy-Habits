@@ -15,11 +15,11 @@ public class Habit {
     @Id
     private String name;
     private ArrayList<Integer> ratings;
-    private ArrayList<String> dates;
+    private ArrayList<Long> dates;
     @ManyToOne
     private User user;
 
-    public Habit(String name, ArrayList<Integer> ratings, ArrayList<String> dates) {
+    public Habit(String name, ArrayList<Integer> ratings, ArrayList<Long> dates) {
         this.name = name;
         this.ratings = ratings;
         this.dates = dates;
@@ -27,22 +27,23 @@ public class Habit {
 
     public Habit() {}
 
-    public List<String> getDates() {
+    public List<Long> getDates() {
         return dates;
     }
 
-    public void setDates(ArrayList<String> dates) {
+    public void setDates(ArrayList<Long> dates) {
         this.dates = dates;
     }
 
-    public void addDate(String date) {
+    public void addDate(Long date) {
     this.dates.add(date);
+        System.out.println("Date added!");
     }
 
     public List<Long> convertDatesToMilliseconds() throws ParseException {
         List<Long> convertedDates = new ArrayList<>();
         for (int i = 0; i < dates.size(); i++) {
-            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dates.get(i));
+            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(dates.get(i)));
             convertedDates.add(date.getTime());
         }
         return convertedDates;

@@ -1,0 +1,1 @@
+[02:35:23] HabitsController Catch Error: java.lang.NullPointerException

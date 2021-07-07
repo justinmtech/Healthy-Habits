@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -45,7 +42,10 @@ public class HabitsController {
         try {
             if (isDataInvalid(habit)) return "errorpage";
             else {
-                if (checkForExistingHabit(habit)) updateExistingHabit(habit);
+                if (checkForExistingHabit(habit)) {
+                    updateExistingHabit(habit);
+                    userService.saveUser(getSiteUser());
+                }
                 else AddHabitToUser(habit);
                 userService.saveUser(getSiteUser());
             }
@@ -77,8 +77,14 @@ public class HabitsController {
     }
 
     private void AddHabitToUser(Habit habit) {
-        habit.setDates(new ArrayList<>(Arrays.asList(getDate())));
+        ArrayList<ArrayList> data = new ArrayList<>();
+        ArrayList<Long> dates = new ArrayList();
+        //List habit2 = getSiteUser().getHabits().stream().filter(h -> h.getName().equals(habit.getName())).collect(Collectors.toList());
+        dates.add(getDate());
+        habit.setDates(dates);
+        //habit.setDates(new ArrayList<>(Arrays.asList(getDate())));
         getSiteUser().getHabits().add(habit);
+        data.add(dates);
         logger.addToLog("Habit " + habit.getName() + " added for user " + getSiteUser().getUsername(), false);
     }
 
@@ -97,14 +103,23 @@ public class HabitsController {
             if (getUserHabits().get(i).getName().equals(habit.getName())) {
                 getSiteUser().getHabits().get(i).getDates().add(getDate());
                 getSiteUser().getHabits().get(i).addRating(habit.getRatings().get(0));
+                userService.saveUser(getSiteUser());
+                System.out.println("Habit updated");
+                System.out.println(getSiteUser().getHabits().get(0).getRatings());
+            } else {
+                System.out.println("Habit not updated");
             }
         }
         logger.addToLog("Habit " + habit.getName() + " updated for user " + getSiteUser().getUsername(), false);
     }
 
-    private String getDate() {
+    /*private String getDate() {
         LocalDateTime date = LocalDateTime.now();
         return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }*/
+
+    private long getDate() {
+        return System.currentTimeMillis();
     }
 
     private User getSiteUser() throws NoSuchElementException {
