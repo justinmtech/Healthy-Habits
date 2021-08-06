@@ -19,6 +19,7 @@ import java.util.NoSuchElementException;
 @Controller
 public class GraphController {
     private List<String> habitList;
+    private List<List> habitDataContainer;
     private List<ArrayList<Integer>> habitDataList2;
     //private List<List> habitData;
     //private Map<Long, Integer> habitDataList = new HashMap<Long, Integer>();
@@ -32,6 +33,7 @@ public class GraphController {
     @GetMapping("/graph")
     public String graph(Model model) throws ParseException {
         habitList = new ArrayList<>();
+        habitDataContainer = new ArrayList<>();
         habitDataList2 = new ArrayList<>();
         getUserHabitInfo();
         addModelAttributes(model);
@@ -53,8 +55,9 @@ public class GraphController {
                 //dataTest.add(habitData);
                 habitDataList2.add(habitData);
                 }
-                System.out.println(habitDataList2);
+                habitDataContainer.add(habitDataList2);
             }
+                System.out.println("habitDataList2: " + habitDataContainer);
             //habitData.add(habitDataList2);
         } catch (Exception e) {
             System.out.println(e.getCause());
@@ -75,6 +78,7 @@ public class GraphController {
     private void addModelAttributes(Model model) {
         model.addAttribute("habitList", habitList);
         model.addAttribute("habitDataList", habitDataList2);
+        model.addAttribute("userHabits", getSiteUser().getHabits());
 
         //One if I just used one model, the site user? And all of it was
         //organized and separated into objects in Javascript.

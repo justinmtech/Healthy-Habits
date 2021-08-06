@@ -60,32 +60,22 @@
             <script src="https://code.highcharts.com/modules/exporting.js"></script>
             <script th:inline="javascript">
             /*<![CDATA[*/
-                var habitList = [[${habitList}]];
-                var habitAmount = habitList.length;
-                var habitDataList = [[${habitDataList}]];
-                var habitDataLength = habitDataList.length;
-                var dataTest = [];
-
+                let data = [];
+                let userHabits = [[${userHabits}]];
             /*]]>*/
 
-             for (var i = 0; i < habitDataLength; i++) {
-                var habitDataArray = [
-                dataTest.push(habitDataList[i])
-                ];
-             }
-
-            seriesArray = [];
-
-            for (var i = 0; i < habitAmount; i++) {
-                var habitNameObject = {
-                    "name": habitList[i],
-                    "data": dataTest
+            for (let i = 0; i < userHabits.length; i++) {
+                let habit = {
+                    name: userHabits[i].name,
+                    data: []
                 };
-                seriesArray.push(habitNameObject);
+                for (let y = 0; y < userHabits[i].ratings.length; y++) {
+                    let habitData = [userHabits[i].dates[y], userHabits[i].ratings[y]];
+                    habit.data.push(habitData);
+                }
+            data.push(habit);
             }
-
-            console.log(seriesArray);
-            console.log(dataTest);
+            console.log(data);
 
             $(function(){
             Highcharts.chart('graph-container', {
@@ -136,7 +126,7 @@
 
               },
 
-                series: seriesArray
+                series: data
 
                 });
             });
