@@ -40,8 +40,6 @@ public class UpdateHabits {
     public String updateHabits(@ModelAttribute Habit habitRatings, Model model) {
         model.addAttribute("habitRatings", habitRatings);
 
-        //habit.setRatings();
-
         return "updatehabits";
     }
 

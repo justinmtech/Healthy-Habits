@@ -104,19 +104,11 @@ public class HabitsController {
                 getSiteUser().getHabits().get(i).getDates().add(getDate());
                 getSiteUser().getHabits().get(i).addRating(habit.getRatings().get(0));
                 userService.saveUser(getSiteUser());
-                System.out.println("Habit updated");
                 System.out.println(getSiteUser().getHabits().get(0).getRatings());
-            } else {
-                System.out.println("Habit not updated");
             }
         }
         logger.addToLog("Habit " + habit.getName() + " updated for user " + getSiteUser().getUsername(), false);
     }
-
-    /*private String getDate() {
-        LocalDateTime date = LocalDateTime.now();
-        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-    }*/
 
     private long getDate() {
         return System.currentTimeMillis();
@@ -131,9 +123,5 @@ public class HabitsController {
             logger.addToLog("User not found", true);
         }
         return user;
-    }
-
-    private void setHabitList(List<Habit> habitList) {
-        getSiteUser().setHabits(habitList);
     }
 }
