@@ -60,7 +60,7 @@ public class HabitsController {
 
     private boolean isDataInvalid(Habit habit) {
         boolean isInvalid = true;
-        if (DataValidation.isValid(habit.getName(), 3, 16)) {
+        if (DataValidation.isValid(habit.getName(), 3, 32)) {
             isInvalid = false;
             for (int i = 0; i < habit.getRatings().size(); i++) {
                 if (!isInvalid) {
@@ -79,10 +79,8 @@ public class HabitsController {
     private void AddHabitToUser(Habit habit) {
         ArrayList<ArrayList> data = new ArrayList<>();
         ArrayList<Long> dates = new ArrayList();
-        //List habit2 = getSiteUser().getHabits().stream().filter(h -> h.getName().equals(habit.getName())).collect(Collectors.toList());
         dates.add(getDate());
         habit.setDates(dates);
-        //habit.setDates(new ArrayList<>(Arrays.asList(getDate())));
         getSiteUser().getHabits().add(habit);
         data.add(dates);
         logger.addToLog("Habit " + habit.getName() + " added for user " + getSiteUser().getUsername(), false);

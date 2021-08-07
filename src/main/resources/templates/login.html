@@ -53,9 +53,9 @@
                     <form action="#" th:action="@{/login}" method="post" th:object="${user}">
                         <div class="form-group">
                             <label for="inputUsername">Username</label>
-                            <input type="text" th:field="*{username}" class="form-control" id="inputUsername" required/>
+                            <input type="text" th:field="*{username}" class="form-control" id="inputUsername" required minlength="3" maxlength="320"/>
                             <label for="inputPassword">Password</label>
-                            <input type="password" th:field="*{password}" class="form-control" id="inputPassword" required />
+                            <input type="password" th:field="*{password}" class="form-control" id="inputPassword" required minlength="7" maxlength="128"/>
                             <button type="submit" class="btn btn-primary">Login</button>
 
                         </div>

@@ -47,15 +47,15 @@
                             <h3>Welcome!</h3>
                         </div>
             </div>
-            <div class="section" id="about">
+            <div class="section" id="register-header">
                     <h1>ENTER INFO</h1>
-                <div class="section-text" id="about-text">
+                <div class="section-text" id="register-text">
                     <form action="#" th:action="@{/register}" method="post" th:object="${user}">
                         <div class="form-group">
                             <label for="inputUsername">Username</label>
-                            <input type="text" th:field="*{username}" class="form-control" id="inputUsername" required minlength="3" maxlength="16"/>
+                            <input type="text" th:field="*{username}" class="form-control" id="inputUsername" required minlength="3" maxlength="320"/>
                             <label for="inputPassword">Password</label>
-                            <input type="password" th:field="*{password}" class="form-control" id="inputPassword" required minlength="7" maxlength="256"/>
+                            <input type="password" th:field="*{password}" class="form-control" id="inputPassword" required minlength="7" maxlength="128"/>
                             <button type="submit" class="btn btn-primary">Create Account</button>
                         </div>
                     </form>

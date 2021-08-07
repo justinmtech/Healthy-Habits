@@ -36,7 +36,7 @@ public class LoginController {
     @PostMapping("/login")
     public String loginSubmit(@ModelAttribute User user, Model model) {
         try {
-        if (DataValidation.isValid(user.getUsername(), 3, 16) &&
+        if (DataValidation.isValid(user.getUsername(), 3, 320) &&
             DataValidation.isPasswordValid(user.getPassword(), 7, 128)) {
             userAuthenticator.setPasswordInput(user.getPassword());
             userAuthenticator.setUsernameInput(user.getUsername());

@@ -110,6 +110,21 @@ body {
 	height: 1100px;
 }
 
+#register-header {
+    height: 500px;
+}
+
+#register-header h1 {
+	top: 15%;
+	text-decoration: underline;
+}
+
+#register-text {
+	top: 50%;
+	left: 35%;
+	text-align: left;
+}
+
 #register-img {
 	height: 500px;
 }
@@ -135,7 +150,7 @@ body {
 }
 
 #register h1 {
-	top: 20%;
+	top: 10%;
 	left: 60%;
 	text-decoration: underline;
 	text-align: left;
@@ -151,12 +166,6 @@ body {
 
 #about-text-habits {
     color: #59C149;
-}
-
-#register-text {
-	top: 60%;
-	left: 35%;
-	text-align: left;
 }
 
 .section-button {

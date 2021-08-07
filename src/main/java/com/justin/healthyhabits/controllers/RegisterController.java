@@ -30,7 +30,7 @@ public class RegisterController {
     public String registerSubmit(@ModelAttribute User user, Model model) {
         model.addAttribute("user", user);
         try {
-            if (DataValidation.isValid(user.getUsername(), 3, 16) &&
+            if (DataValidation.isValid(user.getUsername(), 3, 320) &&
                     DataValidation.isPasswordValid(user.getPassword(), 7, 128)) {
                 userService.addUser(user);
                 logger.addToLog("Registration successful for user " + user.getUsername(), false);

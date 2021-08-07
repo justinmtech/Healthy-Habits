@@ -9,11 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.NoSuchElementException;
 
-@SuppressWarnings("ALL")
 @Controller
 public class GraphController {
 
@@ -44,8 +41,4 @@ public class GraphController {
         model.addAttribute("userHabits", getSiteUser().getHabits());
     }
 
-    private long convertDateToMilliseconds(String date) throws ParseException {
-        Date newDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-        return newDate.getTime();
-        }
 }
