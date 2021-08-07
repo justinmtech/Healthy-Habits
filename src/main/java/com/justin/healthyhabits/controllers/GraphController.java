@@ -26,8 +26,9 @@ public class GraphController {
         return "graph";
     }
 
+
     private User getSiteUser() throws NoSuchElementException {
-        User user = new User();
+        User user = null;
         try {
             user = sessionService.getAllSessions().stream().findFirst().orElseThrow().getSiteUser();
         }

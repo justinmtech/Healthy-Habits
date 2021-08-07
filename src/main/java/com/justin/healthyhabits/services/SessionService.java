@@ -5,7 +5,6 @@ import com.justin.healthyhabits.user.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,9 +15,7 @@ public class SessionService {
     SessionRepository sessionRepository;
 
     public List<Session> getAllSessions() {
-        List<Session> activeSessions = new ArrayList<>();
-        sessionRepository.findAll().forEach(activeSessions::add);
-        return activeSessions;
+        return (List<Session>) sessionRepository.findAll();
     }
 
     public Optional<Session> getSession(int id) {

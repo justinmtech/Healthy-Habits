@@ -6,7 +6,6 @@ import javax.persistence.*;
 public class Session {
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int sessionId;
-    //HttpServletRequest request;
     @OneToOne
     private User user;
 

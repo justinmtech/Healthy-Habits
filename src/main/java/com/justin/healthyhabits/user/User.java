@@ -12,6 +12,8 @@ public class User {
     private String password;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Habit> habits;
+
+
     public String getUsername() {
         return username;
     }
@@ -31,6 +33,12 @@ public class User {
         this.username = username;
         this.password = password;
         this.habits = habits;
+    }
+
+    public User (String username, String password, int userId) {
+        this.username = username;
+        this.password = password;
+        this.userId = userId;
     }
 
     public List<Habit> getHabits() {
