@@ -1,12 +1,15 @@
 package com.justin.healthyhabits.security;
 
 public enum ApplicationUserPermission {
-    USER_READ("user:read"),
-    ADMIN_READ("admin:read");
+    USER_READ("user:read");
 
     private final String permission;
 
     ApplicationUserPermission(String permission) {
         this.permission = permission;
+    }
+
+    public String getPermission() {
+        return permission;
     }
 }

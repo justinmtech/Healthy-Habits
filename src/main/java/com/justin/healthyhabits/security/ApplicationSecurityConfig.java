@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import static com.justin.healthyhabits.security.ApplicationUserRole.USER;
+
 @Configuration
 @EnableWebSecurity
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -27,9 +29,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/register", "/css/*", "/js/*")
-                .permitAll()
+                .antMatchers("/", "/register", "/css/*", "/js/*").permitAll()
+                .antMatchers("/graph", "/habits", "/logout", "/management/**").hasRole(USER.name())
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -41,14 +44,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected UserDetailsService userDetailsService() {
         UserDetails user = User.builder()
                 .username("justinm")
-                .password(passwordEncoder.encode("password5"))
-                .roles("USER")
-                .build();
-
-        UserDetails user2 = User.builder()
-                .username("jack")
                 .password(passwordEncoder.encode("password123"))
-                .roles("ADMIN")
+                .roles(USER.name())
                 .build();
 
         return new InMemoryUserDetailsManager(user);

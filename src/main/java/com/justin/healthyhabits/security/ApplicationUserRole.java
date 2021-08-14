@@ -4,12 +4,10 @@ import com.google.common.collect.Sets;
 
 import java.util.Set;
 
-import static com.justin.healthyhabits.security.ApplicationUserPermission.ADMIN_READ;
 import static com.justin.healthyhabits.security.ApplicationUserPermission.USER_READ;
 
 public enum ApplicationUserRole {
-    USER(Sets.newHashSet(USER_READ),
-    ADMIN(Sets.newHashSet(USER_READ, ADMIN_READ)));
+    USER(Sets.newHashSet(USER_READ));
 
     private final Set<ApplicationUserPermission> permissions;
 
