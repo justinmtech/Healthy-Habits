@@ -1,21 +1,46 @@
 package com.justin.healthyhabits.user;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int userId;
     private String username;
     private String password;
+    private String role;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Habit> habits;
-
+    private List<GrantedAuthority> authorities;
 
     public String getUsername() {
         return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setUsername(String username) {
@@ -41,6 +66,13 @@ public class User {
         this.userId = userId;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
     public List<Habit> getHabits() {
         return habits;
     }
@@ -55,6 +87,15 @@ public class User {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<GrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 
     public String getPassword() {

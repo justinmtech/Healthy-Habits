@@ -5,9 +5,10 @@ import com.google.common.collect.Sets;
 import java.util.Set;
 
 import static com.justin.healthyhabits.security.ApplicationUserPermission.USER_READ;
+import static com.justin.healthyhabits.security.ApplicationUserPermission.USER_WRITE;
 
 public enum ApplicationUserRole {
-    USER(Sets.newHashSet(USER_READ));
+    USER(Sets.newHashSet(USER_READ, USER_WRITE));
 
     private final Set<ApplicationUserPermission> permissions;
 

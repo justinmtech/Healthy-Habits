@@ -1,0 +1,4 @@
+[10:48:26] Login failed for username justinmate: java.util.NoSuchElementException: No value present
+[10:49:26] User not found
+[11:10:21] User not found
+[11:18:48] User not found
