@@ -1,15 +1,13 @@
 package com.justin.healthyhabits.controllers;
 
+import com.justin.healthyhabits.services.CustomUserDetailsService;
 import com.justin.healthyhabits.services.LoggerService;
-import com.justin.healthyhabits.services.SessionService;
-import com.justin.healthyhabits.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.text.ParseException;
-import java.util.NoSuchElementException;
 
 @Controller
 public class GraphController {
@@ -18,7 +16,7 @@ public class GraphController {
     LoggerService logger;
 
     @Autowired
-    SessionService sessionService;
+    CustomUserDetailsService userd;
 
     @GetMapping("/graph")
     public String graph(Model model) throws ParseException {
@@ -26,20 +24,8 @@ public class GraphController {
         return "graph";
     }
 
-
-    private User getSiteUser() throws NoSuchElementException {
-        User user = null;
-        try {
-            user = sessionService.getAllSessions().stream().findFirst().orElseThrow().getSiteUser();
-        }
-        catch (NoSuchElementException e) {
-            logger.addToLog("User not found", true);
-        }
-        return user;
-    }
-
     private void addModelAttributes(Model model) {
-        model.addAttribute("userHabits", getSiteUser().getHabits());
+        model.addAttribute("userHabits", userd.getUser().getHabits());
     }
 
 }

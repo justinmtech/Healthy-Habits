@@ -1,32 +1,31 @@
 package com.justin.healthyhabits.user;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CustomUserDetails implements UserDetails {
     private String username;
     private String password;
-    private String role;
     private List<GrantedAuthority> authorities;
     private List<Habit> habits;
 
-    public CustomUserDetails(String username, String password, String role, List<GrantedAuthority> authorities, List<Habit> habits) {
-        this.username = username;
-        this.password = password;
-        this.role = role;
-        this.authorities = authorities;
-        this.habits = habits;
+    public CustomUserDetails(User user) {
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.authorities = Arrays.stream(user.getRoles().split(","))
+                    .map(SimpleGrantedAuthority::new)
+                    .collect(Collectors.toList());
+        this.habits = user.getHabits();
     }
 
     public void setHabits(List<Habit> habits) {
         this.habits = habits;
-    }
-
-    public String getRole() {
-        return role;
     }
 
     public List<Habit> getHabits() {
@@ -39,10 +38,6 @@ public class CustomUserDetails implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public void setAuthorities(List<GrantedAuthority> authorities) {

@@ -1,11 +1,10 @@
 package com.justin.healthyhabits.controllers;
 
+import com.justin.healthyhabits.services.CustomUserDetailsService;
 import com.justin.healthyhabits.services.DataValidation;
 import com.justin.healthyhabits.services.LoggerService;
-import com.justin.healthyhabits.services.SessionService;
 import com.justin.healthyhabits.services.UserService;
 import com.justin.healthyhabits.user.Habit;
-import com.justin.healthyhabits.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,10 +23,10 @@ public class HabitsController {
     LoggerService logger;
 
     @Autowired
-    SessionService sessionService;
+    UserService userService;
 
     @Autowired
-    UserService userService;
+    CustomUserDetailsService userd;
 
     @SuppressWarnings("SameReturnValue")
     @GetMapping("/habits")
@@ -44,10 +43,10 @@ public class HabitsController {
             else {
                 if (checkForExistingHabit(habit)) {
                     updateExistingHabit(habit);
-                    userService.saveUser(getSiteUser());
+                    userService.saveUser(userd.getUser());
                 }
                 else AddHabitToUser(habit);
-                userService.saveUser(getSiteUser());
+                userService.saveUser(userd.getUser());
             }
         } catch (NullPointerException | NoSuchElementException e) {
             System.out.println("HabitController Habit Submit Error: " + e.toString());
@@ -73,7 +72,7 @@ public class HabitsController {
     }
 
     private List<Habit> getUserHabits() {
-        return getSiteUser().getHabits();
+        return userd.getUser().getHabits();
     }
 
     private void AddHabitToUser(Habit habit) {
@@ -81,9 +80,9 @@ public class HabitsController {
         ArrayList<Long> dates = new ArrayList();
         dates.add(getDate());
         habit.setDates(dates);
-        getSiteUser().getHabits().add(habit);
+        userd.getUser().getHabits().add(habit);
         data.add(dates);
-        logger.addToLog("Habit " + habit.getName() + " added for user " + getSiteUser().getUsername(), false);
+        logger.addToLog("Habit " + habit.getName() + " added for user " + userd.getUser().getUsername(), false);
     }
 
     private boolean checkForExistingHabit(Habit habit) {
@@ -99,27 +98,16 @@ public class HabitsController {
     private void updateExistingHabit(Habit habit) {
         for (int i = 0; i < getUserHabits().size(); i++) {
             if (getUserHabits().get(i).getName().equals(habit.getName())) {
-                getSiteUser().getHabits().get(i).getDates().add(getDate());
-                getSiteUser().getHabits().get(i).addRating(habit.getRatings().get(0));
-                userService.saveUser(getSiteUser());
-                System.out.println(getSiteUser().getHabits().get(0).getRatings());
+                userd.getUser().getHabits().get(i).getDates().add(getDate());
+                userd.getUser().getHabits().get(i).addRating(habit.getRatings().get(0));
+                userService.saveUser(userd.getUser());
+                System.out.println(userd.getUser().getHabits().get(0).getRatings());
             }
         }
-        logger.addToLog("Habit " + habit.getName() + " updated for user " + getSiteUser().getUsername(), false);
+        logger.addToLog("Habit " + habit.getName() + " updated for user " + userd.getUser().getUsername(), false);
     }
 
     private long getDate() {
         return System.currentTimeMillis();
-    }
-
-    private User getSiteUser() throws NoSuchElementException {
-        User user = new User();
-        try {
-            user = sessionService.getAllSessions().stream().findFirst().orElseThrow().getSiteUser();
-        }
-        catch (NoSuchElementException e) {
-            logger.addToLog("User not found", true);
-        }
-        return user;
     }
 }
