@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.text.ParseException;
 
 @Controller
-public class GraphController {
+public class VisualizerController {
 
     @Autowired
     LoggerService logger;
@@ -18,10 +18,10 @@ public class GraphController {
     @Autowired
     CustomUserDetailsService userd;
 
-    @GetMapping("/graph")
+    @GetMapping("/visualizer")
     public String graph(Model model) throws ParseException {
         addModelAttributes(model);
-        return "graph";
+        return "visualizer";
     }
 
     private void addModelAttributes(Model model) {

@@ -1,9 +1,15 @@
 package com.justin.healthyhabits.services;
 
+import com.justin.healthyhabits.user.Habit;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DataValidation {
+    @Autowired
+    LoggerService logger;
+
     private static String inputString;
     private static int inputInt;
 
@@ -34,5 +40,16 @@ public class DataValidation {
     public static boolean isPasswordValid(String input, int min, int max) {
         DataValidation.inputString = input;
         return isTooLong(min, max);
+    }
+
+    public static boolean isHabitValid(Habit habit) {
+        if (DataValidation.isValid(habit.getName(), 3, 32)) {
+            for (int item : habit.getRatings()) {
+                if (!DataValidation.isValid(item, 0, 10)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

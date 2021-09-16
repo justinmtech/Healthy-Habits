@@ -39,43 +39,32 @@ public class HabitsController {
     public String habitSubmit(@ModelAttribute Habit habit, Model model) {
         model.addAttribute("habit", habit);
         try {
-            if (isDataInvalid(habit)) return "errorpage";
-            else {
-                if (checkForExistingHabit(habit)) {
-                    updateExistingHabit(habit);
-                    userService.saveUser(userd.getUser());
+            if (habit.getHabitType().equals("add")) {
+                if (!DataValidation.isHabitValid((habit))) return "errorpage";
+                else {
+                    if (habitExists(habit)) {
+                        updateHabit(habit);
+                    } else {
+                        addNewHabit(habit);
+                    }
                 }
-                else AddHabitToUser(habit);
-                userService.saveUser(userd.getUser());
-            }
+            } else if (habit.getHabitType().equals("remove")) {
+                    userd.getUser().getHabits().removeIf(h -> h.getName().equals(habit.getName()));
+                }
+            userService.saveUser(userd.getUser());
+
         } catch (NullPointerException | NoSuchElementException e) {
-            System.out.println("HabitController Habit Submit Error: " + e.toString());
-            System.out.println("HabitController Habit Submit Error: " + e.getCause());
             logger.addToLog("HabitsController Catch Error: " + e.toString(), true);
             return "errorpage";
         }
         return "habitspage";
     }
 
-    private boolean isDataInvalid(Habit habit) {
-        boolean isInvalid = true;
-        if (DataValidation.isValid(habit.getName(), 3, 32)) {
-            isInvalid = false;
-            for (int i = 0; i < habit.getRatings().size(); i++) {
-                if (!isInvalid) {
-                    isInvalid = !DataValidation.isValid(habit.getRatings().get(i), 0, 10);
-                }
-            }
-        }
-        if (isInvalid) logger.addToLog("HabitsController isDataInvalid Error", true);
-        return isInvalid;
-    }
-
     private List<Habit> getUserHabits() {
         return userd.getUser().getHabits();
     }
 
-    private void AddHabitToUser(Habit habit) {
+    private void addNewHabit(Habit habit) {
         ArrayList<ArrayList> data = new ArrayList<>();
         ArrayList<Long> dates = new ArrayList();
         dates.add(getDate());
@@ -85,23 +74,25 @@ public class HabitsController {
         logger.addToLog("Habit " + habit.getName() + " added for user " + userd.getUser().getUsername(), false);
     }
 
-    private boolean checkForExistingHabit(Habit habit) {
-        boolean habitExists = false;
-        for (int i = 0; i < getUserHabits().size(); i++) {
-            if (getUserHabits().get(i).getName().equals(habit.getName())) {
-                habitExists = true;
-            }
-        }
-        return habitExists;
+    private void removeHabit(Habit habit) {
+        userd.getUser().getHabits().remove(habit);
     }
 
-    private void updateExistingHabit(Habit habit) {
+    private boolean habitExists(Habit habit) {
+        for (int i = 0; i < getUserHabits().size(); i++) {
+            if (getUserHabits().get(i).getName().equals(habit.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void updateHabit(Habit habit) {
         for (int i = 0; i < getUserHabits().size(); i++) {
             if (getUserHabits().get(i).getName().equals(habit.getName())) {
                 userd.getUser().getHabits().get(i).getDates().add(getDate());
                 userd.getUser().getHabits().get(i).addRating(habit.getRatings().get(0));
                 userService.saveUser(userd.getUser());
-                System.out.println(userd.getUser().getHabits().get(0).getRatings());
             }
         }
         logger.addToLog("Habit " + habit.getName() + " updated for user " + userd.getUser().getUsername(), false);

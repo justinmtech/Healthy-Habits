@@ -17,10 +17,13 @@
                             <a class="navbar-link" href="http://localhost:8082/">Home</a>
                         </div>
                         <div class="navbar-item-active">
-                            <a class="nav-link" href="http://localhost:8082/habits">My Habits</a>
+                            <a class="nav-link" href="http://localhost:8082/habits">Add Habits</a>
                         </div>
                         <div class="navbar-item">
-                            <a class="nav-link" href="http://localhost:8082/graph">Visualizer</a>
+                            <a class="nav-link" href="http://localhost:8082/habits-remove">Remove Habits</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a class="nav-link" href="http://localhost:8082/visualizer">Visualizer</a>
                         </div>
                     </div>
             </div>
@@ -53,9 +56,14 @@
                     <form action="#" th:action="@{/habits}" method="post" th:object="${habit}">
                         <div class="form-group">
                             <label for="inputHabitName">Name </label>
-                            <input type="text" th:field="*{name}" class="form-control" id="inputHabitName" required minlength="3" maxlength="32"/>
+                                <input type="text" th:field="*{name}" class="form-control" id="inputHabitName" required minlength="3" maxlength="32"/>
                             <label for="inputHabitRating">Rating </label>
-                            <input type="text" th:field="*{ratings}" class="form-control" id="inputHabitRating" required aria-valuemin="0" aria-valuemax="10"/>
+                                <input type="text" th:field="*{ratings}" class="form-control" id="inputHabitRating" required aria-valuemin="0" aria-valuemax="10"/>
+                            <label for="action">Action </label>
+                                <select id="action" name="action" size="2" th:field="*{habitType}">
+                                    <option th:value="add">Add</option>
+                                    <option th:value="remove">Remove</option>
+                                </select>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>

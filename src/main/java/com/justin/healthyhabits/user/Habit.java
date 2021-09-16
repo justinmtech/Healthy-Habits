@@ -3,19 +3,21 @@ package com.justin.healthyhabits.user;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@SuppressWarnings("unused")
 @Entity
 public class Habit {
     @Id
     private String name;
     private ArrayList<Integer> ratings;
     private ArrayList<Long> dates;
+    @Transient
+    private String habitType;
     @ManyToOne
     private User user;
 
@@ -23,9 +25,18 @@ public class Habit {
         this.name = name;
         this.ratings = ratings;
         this.dates = dates;
+        this.habitType = "add";
     }
 
-    public Habit() {}
+    public Habit(String name, ArrayList<Integer> ratings, ArrayList<Long> dates, String habitType) {
+        this.name = name;
+        this.ratings = ratings;
+        this.dates = dates;
+        this.habitType = habitType;
+    }
+
+    public Habit() {
+    }
 
     public List<Long> getDates() {
         return dates;
@@ -49,11 +60,11 @@ public class Habit {
         return convertedDates;
     }
 
-    public User getSiteUsers() {
+    public User getUser() {
         return user;
     }
 
-    public void setSiteUsers(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -75,5 +86,13 @@ public class Habit {
 
     public void addRating(int rating) {
         this.ratings.add(rating);
+    }
+
+    public String getHabitType() {
+        return habitType;
+    }
+
+    public void setHabitType(String habitType) {
+        this.habitType = habitType;
     }
 }

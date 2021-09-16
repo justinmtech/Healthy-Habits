@@ -2,7 +2,7 @@
 
 <html>
 
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>Healthy Habits</title>
@@ -13,11 +13,14 @@
 <div class="navbar">
     <div class="navbar-left">
         <div class="navbar-items">
-            <div class="navbar-item-active">
-                <a class="navbar-link" href="http://localhost:8082/home">Home</a>
+            <div class="navbar-item">
+                <a class="navbar-link" href="http://localhost:8082/">Home</a>
             </div>
             <div class="navbar-item">
-                <a class="nav-link" href="http://localhost:8082/habits">My Habits</a>
+                <a class="nav-link" href="http://localhost:8082/habits">Add Habits</a>
+            </div>
+            <div class="navbar-item-active">
+                <a class="nav-link" href="http://localhost:8082/habits-remove">Remove Habits</a>
             </div>
             <div class="navbar-item">
                 <a class="nav-link" href="http://localhost:8082/visualizer">Visualizer</a>
@@ -31,7 +34,9 @@
                     <a class="navbar-link" href="">Account</a>
                 </div>
                 <div class="dropdown-content">
+                    <a href="http://localhost:8082/login">Login</a>
                     <a href="http://localhost:8082/logout">Logout</a>
+                    <a href="http://localhost:8082/register">Register</a>
                 </div>
             </div>
         </div>
@@ -40,15 +45,21 @@
 <div class="content-wrapper">
     <div class="section" id="header">
         <div class="section-img" id="img-header" style="background-image: url(images/cover2.jpg)"></div>
-        <h1>Login Successful</h1>
+        <h1>Habits</h1>
         <div class="section-text" id="header-text">
-            <h3>Welcome back!</h3>
+            <h3>Remove habits!</h3>
         </div>
     </div>
     <div class="section" id="about">
-        <h1>LOGGED IN</h1>
-        <div class="section-text" id="about-text">
-            <p>You have logged in to your account.</p>
+        <h1>REMOVE HABIT</h1>
+        <div class="section-text" id="about-text-habits">
+            <form action="#" th:action="@{/habits-remove}" method="post" th:object="${habit}">
+                <div class="form-group">
+                    <label for="inputHabitName">Name </label>
+                    <input type="text" th:field="*{name}" class="form-control" id="inputHabitName" required minlength="3" maxlength="32"/>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 
