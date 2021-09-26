@@ -32,6 +32,7 @@ public class HabitsController {
     @GetMapping("/habits")
     public String habitForm(Model model) {
         model.addAttribute("habit", new Habit());
+        model.addAttribute("user", userd.getUser());
         return "habitspage";
     }
 

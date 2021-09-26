@@ -95,4 +95,9 @@ public class Habit {
     public void setHabitType(String habitType) {
         this.habitType = habitType;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

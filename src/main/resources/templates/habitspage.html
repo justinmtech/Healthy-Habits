@@ -30,8 +30,8 @@
             <div class="navbar-right">
                 <div class="dropdown">
                     <div class="navbar-items">
-                        <div class="navbar-item">
-                            <a class="navbar-link" href="">Account</a>
+                          <div class="navbar-item" th:object="${user}">
+                            <a class="navbar-link" href="" th:text="*{username}"></a>
                         </div>
                         <div class="dropdown-content">
                             <a href="http://localhost:8082/login">Login</a>
@@ -52,13 +52,29 @@
             </div>
             <div class="section" id="about">
                     <h1>ADD HABIT</h1>
+                    <div th:object="${user}">
+                        <p th:text="*{habits}">Test</p>
+                    </div>
                 <div class="section-text" id="about-text-habits">
                     <form action="#" th:action="@{/habits}" method="post" th:object="${habit}">
                         <div class="form-group">
                             <label for="inputHabitName">Name </label>
                                 <input type="text" th:field="*{name}" class="form-control" id="inputHabitName" required minlength="3" maxlength="32"/>
+
                             <label for="inputHabitRating">Rating </label>
-                                <input type="text" th:field="*{ratings}" class="form-control" id="inputHabitRating" required aria-valuemin="0" aria-valuemax="10"/>
+<!--                                <select id="rating" name="rating" size="10" id="inputHabitRating" th:field="*{ratings}">
+                                    <option th:value="1">1</option>
+                                    <option th:value="2">2</option>
+                                    <option th:value="3">3</option>
+                                    <option th:value="4">4</option>
+                                    <option th:value="5">5</option>
+                                    <option th:value="6">6</option>
+                                    <option th:value="7">7</option>
+                                    <option th:value="8">8</option>
+                                    <option th:value="9">9</option>
+                                    <option th:value="10">10</option>
+                                </select>-->
+                                <input type="text" th:field="*{ratings}" class="form-control" id="inputHabitRating" aria-valuemin="0" aria-valuemax="10"/>
                             <label for="action">Action </label>
                                 <select id="action" name="action" size="2" th:field="*{habitType}">
                                     <option th:value="add">Add</option>
