@@ -95,34 +95,56 @@ body {
 }
 
 #header {
-	height: 750px;
+	height: 600px;
+}
+
+#register-section {
+	height: 400px;
+}
+
+#register-img {
+    height: 400px;
 }
 
 #img-header {
-	height: 750px;
+	height: 600px;
 }
 
 #register {
-	height: 750px;
+	height: 300px;
+	display: grid;
+	align-content: center;
 }
 
 #about {
-	height: 1100px;
+	height: 800px;
+}
+
+#habits-section {
+    height: 500px;
 }
 
 #register-header {
-    height: 500px;
+    height: 250px;
 }
 
 #register-header h1 {
 	top: 15%;
-	text-decoration: underline;
+    color: #59C149;
 }
 
 #register-text {
 	top: 50%;
 	left: 35%;
+	text-align: center;
+	color: #59C149;
+}
+
+#register-bullet-points {
+	top: 50%;
+	left: 35%;
 	text-align: left;
+	color: white;
 }
 
 #register-img {
@@ -136,7 +158,16 @@ body {
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 100%;
+}
+
+#habits-header {
+	font-size: 48px;
+	text-align: center;
+	color: #59C149;
+	position: absolute;
+	left: 50%;
+	top: 10%;
+	transform: translate(-50%, -50%);
 }
 
 #header h1 {
@@ -156,8 +187,14 @@ body {
 	text-align: left;
 }
 
+#get-started {
+	top: 10%;
+	text-decoration: underline;
+	text-align: left;
+}
+
 #header-text {
-	top: 60%;
+	bottom: 75%;
 }
 
 #about-text {
@@ -256,8 +293,8 @@ body {
 }
 
 .footer-copyright {
-	font-size: 12px;
-	color: black;
+	font-size: 24px;
+	color: #333333;
 }
 
 .footer-items a:hover {
