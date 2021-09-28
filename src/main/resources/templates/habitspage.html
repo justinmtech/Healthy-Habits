@@ -17,10 +17,7 @@
                             <a class="navbar-link" href="http://justinm.tech">Home</a>
                         </div>
                         <div class="navbar-item-active">
-                            <a class="nav-link" href="http://justinm.tech/habits">Add Habits</a>
-                        </div>
-                        <div class="navbar-item">
-                            <a class="nav-link" href="http://justinm.tech/habits-remove">Remove Habits</a>
+                            <a class="nav-link" href="http://justinm.tech/habits">Habits</a>
                         </div>
                         <div class="navbar-item">
                             <a class="nav-link" href="http://justinm.tech/visualizer">Visualizer</a>
@@ -31,12 +28,10 @@
                 <div class="dropdown">
                     <div class="navbar-items">
                           <div class="navbar-item" th:object="${user}">
-                            <a class="navbar-link" href="" th:text="*{username}"></a>
+                            <a class="navbar-link" th:text="${user.username}"></a>
                         </div>
                         <div class="dropdown-content">
-                            <a href="http://justinm.tech/login">Login</a>
                             <a href="http://justinm.tech/logout">Logout</a>
-                            <a href="http://justinm.tech/register">Register</a>
                         </div>
                     </div>
                 </div>
@@ -50,11 +45,8 @@
                             <h3>Add or remove habits to track..</h3>
                         </div>
             </div>
-            <div class="section" id="about">
-                    <h1>ADD HABIT</h1>
-                    <div th:object="${user}">
-                        <p th:text="*{habits}">Test</p>
-                    </div>
+            <div class="section" id="habits-section">
+                <h1 class="section-text" id="habits-header">ADD HABIT</h1>
                 <div class="section-text" id="about-text-habits">
                     <form action="#" th:action="@{/habits}" method="post" th:object="${habit}">
                         <div class="form-group">
@@ -84,17 +76,15 @@
                         </div>
                     </form>
                 </div>
+                <div class="section-text" th:object="${user}">
+                    <p class="section-text" id="habit-list" th:text="*{habits}"></p>
+                </div>
             </div>
 
             <div class="footer">
                     <div class="footer-content">
                         <div class="footer-links">
                             <div class="footer-items"> 
-                                <a class="footer-link" href="http://localhost:8082/logout">About</a> 
-                                <a class="footer-link" href="http://localhost:8082/logout">About</a>                                                                                              
-                                <a class="footer-link" href="http://localhost:8082/logout">About</a>
-                                <a class="footer-link" href="http://localhost:8082/logout">About</a>                                                                    
-
                                 <div class="footer-copyright">
                                 <p>Copyright © 2021 Justin Mitchell</p> 
                             </div>                            

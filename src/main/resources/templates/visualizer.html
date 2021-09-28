@@ -17,7 +17,7 @@
                             <a class="navbar-link" href="http://justinm.tech">Home</a>
                         </div>
                         <div class="navbar-item">
-                            <a class="nav-link" href="http://justinm.tech/habits">My Habits</a>
+                            <a class="nav-link" href="http://justinm.tech/habits">Habits</a>
                         </div>
                         <div class="navbar-item-active">
                             <a class="nav-link" href="http://justinm.tech/visualizer">Visualizer</a>
@@ -27,13 +27,11 @@
             <div class="navbar-right">
                 <div class="dropdown">
                     <div class="navbar-items">
-                        <div class="navbar-item">
-                            <a class="navbar-link" href="http://justinm.tech">Account</a>
-                        </div> 
+                        <div class="navbar-item" th:object="${user}">
+                            <a class="navbar-link" th:text="${user.username}"></a>
+                        </div>
                     <div class="dropdown-content">
-                        <a href="login.html">Login</a>
-                        <a href="logout.html">Logout</a>                       
-                        <a href="register.html">Register</a>                      
+                        <a href="http://justinm.tech/logout">Logout</a>
                     </div>
                     </div>
                 </div>
@@ -138,11 +136,6 @@
                     <div class="footer-content">
                         <div class="footer-links">
                             <div class="footer-items"> 
-                                <a class="footer-link" href="http://localhost:8082/logout">About</a> 
-                                <a class="footer-link" href="http://localhost:8082/logout">About</a>                                                                                              
-                                <a class="footer-link" href="http://localhost:8082/logout">About</a>
-                                <a class="footer-link" href="http://localhost:8082/logout">About</a>                                                                    
-
                                 <div class="footer-copyright">
                                 <p>Copyright © 2021 Justin Mitchell</p> 
                             </div>                            

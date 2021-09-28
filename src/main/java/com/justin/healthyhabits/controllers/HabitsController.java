@@ -39,6 +39,7 @@ public class HabitsController {
     @PostMapping("/habits")
     public String habitSubmit(@ModelAttribute Habit habit, Model model) {
         model.addAttribute("habit", habit);
+        model.addAttribute("user", userd.getUser());
         try {
             if (habit.getHabitType().equals("add")) {
                 if (!DataValidation.isHabitValid((habit))) return "errorpage";

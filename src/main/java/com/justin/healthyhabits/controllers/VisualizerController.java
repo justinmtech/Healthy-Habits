@@ -20,12 +20,8 @@ public class VisualizerController {
 
     @GetMapping("/visualizer")
     public String graph(Model model) throws ParseException {
-        addModelAttributes(model);
+        model.addAttribute("userHabits", userd.getUser().getHabits());
+        model.addAttribute("user", userd.getUser());
         return "visualizer";
     }
-
-    private void addModelAttributes(Model model) {
-        model.addAttribute("userHabits", userd.getUser().getHabits());
-    }
-
 }
