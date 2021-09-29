@@ -75,9 +75,9 @@
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
-                </div>
-                <div class="section-text" th:object="${user}">
-                    <p class="section-text" id="habit-list" th:text="*{habits}"></p>
+                    <div th:object="${user}">
+                        <p th:text="*{habits}"></p>
+                    </div>
                 </div>
             </div>
 
