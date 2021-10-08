@@ -38,6 +38,7 @@ public class HabitsController {
 
     @PostMapping("/habits")
     public String habitSubmit(@ModelAttribute Habit habit, Model model) {
+        habit.setName(habit.getName().trim());
         model.addAttribute("habit", habit);
         model.addAttribute("user", userd.getUser());
         try {
@@ -82,7 +83,7 @@ public class HabitsController {
 
     private boolean habitExists(Habit habit) {
         for (int i = 0; i < getUserHabits().size(); i++) {
-            if (getUserHabits().get(i).getName().equals(habit.getName())) {
+            if (getUserHabits().get(i).getName().equalsIgnoreCase(habit.getName())) {
                 return true;
             }
         }
