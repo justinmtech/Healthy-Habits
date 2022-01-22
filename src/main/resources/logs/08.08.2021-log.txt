@@ -1,7 +1,0 @@
-[05:18:09] Registration successful for user justinmate
-[05:18:16] Login successful for user justinmate
-[05:18:59] Habit YouTube added for user justinmate
-[05:19:17] Habit Facebook added for user justinmate
-[05:19:33] Habit Facebook updated for user justinmate
-[05:21:05] Habit YouTube updated for user justinmate
-[05:21:16] Habit Facebook updated for user justinmate

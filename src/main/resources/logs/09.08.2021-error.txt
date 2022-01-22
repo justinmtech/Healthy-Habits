@@ -1,2 +1,0 @@
-[02:32:49] User not found
-[02:46:18] java.util.NoSuchElementException: No value present

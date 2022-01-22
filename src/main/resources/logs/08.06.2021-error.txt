@@ -1,5 +1,0 @@
-[06:51:16] java.util.NoSuchElementException: No value present
-[06:58:56] HabitsController isDataInvalid Error
-[06:59:08] HabitsController isDataInvalid Error
-[08:59:09] User not found
-[09:43:26] java.util.NoSuchElementException: No value present
