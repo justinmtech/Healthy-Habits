@@ -77,10 +77,6 @@ public class HabitsController {
         logger.addToLog("Habit " + habit.getName() + " added for user " + userd.getUser().getUsername(), false);
     }
 
-    private void removeHabit(Habit habit) {
-        userd.getUser().getHabits().remove(habit);
-    }
-
     private boolean habitExists(Habit habit) {
         for (int i = 0; i < getUserHabits().size(); i++) {
             if (getUserHabits().get(i).getName().equalsIgnoreCase(habit.getName())) {
