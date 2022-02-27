@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Controller
@@ -52,7 +53,7 @@ public class HabitsController {
                     }
                 }
             } else if (habit.getHabitType().equals("remove")) {
-                    userd.getUser().getHabits().removeIf(h -> h.getName().equals(habit.getName()));
+                    userd.getUser().getHabits().remove(habit.getName());
                 }
             userService.saveUser(userd.getUser());
 
@@ -63,7 +64,7 @@ public class HabitsController {
         return "habitspage";
     }
 
-    private List<Habit> getUserHabits() {
+    private Map<String, Habit> getUserHabits() {
         return userd.getUser().getHabits();
     }
 
@@ -72,7 +73,7 @@ public class HabitsController {
         ArrayList<Long> dates = new ArrayList();
         dates.add(getDate());
         habit.setDates(dates);
-        userd.getUser().getHabits().add(habit);
+        userd.getUser().getHabits().put(habit.getName(), habit);
         data.add(dates);
         logger.addToLog("Habit " + habit.getName() + " added for user " + userd.getUser().getUsername(), false);
     }
@@ -88,9 +89,9 @@ public class HabitsController {
 
     private void updateHabit(Habit habit) {
         for (int i = 0; i < getUserHabits().size(); i++) {
-            if (getUserHabits().get(i).getName().equals(habit.getName())) {
-                userd.getUser().getHabits().get(i).getDates().add(getDate());
-                userd.getUser().getHabits().get(i).addRating(habit.getRatings().get(0));
+            if (getUserHabits().get(habit.getName()) != null) {
+                userd.getUser().getHabits().get(habit.getName()).addDate(getDate());
+                userd.getUser().getHabits().get(habit.getName()).addRating(habit.getRatings().get(0));
                 userService.saveUser(userd.getUser());
             }
         }

@@ -9,13 +9,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class CustomUserDetails implements UserDetails {
     private String username;
     private String password;
     private List<GrantedAuthority> authorities;
-    private List<Habit> habits;
+    private Map<String, Habit> habits;
 
     public CustomUserDetails(User user) {
         this.username = user.getUsername();
@@ -26,11 +27,11 @@ public class CustomUserDetails implements UserDetails {
         this.habits = user.getHabits();
     }
 
-    public void setHabits(List<Habit> habits) {
+    public void setHabits(Map<String, Habit> habits) {
         this.habits = habits;
     }
 
-    public List<Habit> getHabits() {
+    public Map<String, Habit> getHabits() {
         return habits;
     }
 

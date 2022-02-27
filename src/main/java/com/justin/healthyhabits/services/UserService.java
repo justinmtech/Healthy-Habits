@@ -18,7 +18,7 @@ public class UserService {
         return (List<User>) userRepository.findAll();
     }
 
-    public Optional<User> getUser(int id) {
+    public Optional<User> getUser(String id) {
         return userRepository.findById(id);
     }
 
@@ -30,7 +30,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void deleteUser(int id) {
+    public void deleteUser(String id) {
         userRepository.deleteById(id);
     }
 }

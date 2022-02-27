@@ -2,17 +2,17 @@ package com.justin.healthyhabits.user;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "users")
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int userId;
+    @Id
     private String username;
     private String password;
     private String roles;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Habit> habits;
+    private Map<String, Habit> habits;
 
     public String getUsername() {
         return username;
@@ -32,21 +32,14 @@ public class User {
         this.roles = "USER";
     }
 
-    public User(String username, String password, List<Habit> habits) {
+    public User(String username, String password, Map<String, Habit> habits) {
         this.username = username;
         this.password = password;
         this.habits = habits;
         this.roles = "USER";
     }
 
-    public User (String username, String password, int userId) {
-        this.username = username;
-        this.password = password;
-        this.userId = userId;
-        this.roles = "USER";
-    }
-
-    public List<Habit> getHabits() {
+    public Map<String, Habit> getHabits() {
         return habits;
     }
 
@@ -62,16 +55,8 @@ public class User {
         this.roles = roles;
     }
 
-    public void setHabits(List<Habit> habits) {
+    public void setHabits(Map<String, Habit> habits) {
         this.habits = habits;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public void setPassword(String password) {
