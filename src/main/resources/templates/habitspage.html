@@ -75,8 +75,13 @@
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
-                    <div th:object="${user}">
-                        <p th:text="*{habits}"></p>
+                    <div class="section" id="habits-list" th:object="${user}">
+                        <ul>
+                            <li th:each="key: ${user.habits.keySet()}">
+                                <p th:text="${key}"></p>
+                            </li>
+                        </ul>
+                        <!--<p th:text="*{habits}"></p>-->
                     </div>
                 </div>
             </div>

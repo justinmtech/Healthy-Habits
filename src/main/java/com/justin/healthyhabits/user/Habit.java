@@ -47,8 +47,7 @@ public class Habit {
     }
 
     public void addDate(Long date) {
-    this.dates.add(date);
-        System.out.println("Date added!");
+    dates.add(date);
     }
 
     public List<Long> convertDatesToMilliseconds() throws ParseException {

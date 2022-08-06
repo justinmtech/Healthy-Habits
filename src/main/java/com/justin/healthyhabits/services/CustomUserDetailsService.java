@@ -20,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userService.getUser(username);
-        if (!user.isPresent()) {
+        if (user.isEmpty()) {
             throw new UsernameNotFoundException("User not found: " + username);
         }
         return user.map(CustomUserDetails::new).get();
@@ -34,7 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public User getUser() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> user = userService.getUser(userDetails.getUsername());
-        if (!user.isPresent()) {
+        if (user.isEmpty()) {
             throw new UsernameNotFoundException("User not found: " + userDetails.getUsername());
         }
         return user.get();

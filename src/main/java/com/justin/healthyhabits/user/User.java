@@ -1,7 +1,6 @@
 package com.justin.healthyhabits.user;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Map;
 
 @Entity

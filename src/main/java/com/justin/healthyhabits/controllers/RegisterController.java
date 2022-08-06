@@ -1,7 +1,6 @@
 package com.justin.healthyhabits.controllers;
 
 import com.justin.healthyhabits.services.DataValidation;
-import com.justin.healthyhabits.services.LoggerService;
 import com.justin.healthyhabits.services.UserService;
 import com.justin.healthyhabits.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class RegisterController {
-
-    @Autowired
-    LoggerService logger;
 
     @Autowired
     UserService userService;
@@ -43,14 +39,12 @@ public class RegisterController {
                     DataValidation.isPasswordValid(user.getPassword(), 7, 128)) {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
                 userService.addUser(user);
-                logger.addToLog("Registration successful for user " + user.getUsername(), false);
                 return "registersuccessful";
             } else {
-                return "errorpage";
+               return "errorpage";
             }
-        } catch (NullPointerException e) {
-            System.out.println("Register failed: " + e.toString());
-            logger.addToLog("Registration failed for user " + user.getUsername(), true);
+        } catch (Exception e) {
+            System.out.println("Register failed: " + e);
             return "errorpage";
         }
     }

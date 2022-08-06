@@ -1,7 +1,6 @@
 package com.justin.healthyhabits.controllers;
 
 import com.justin.healthyhabits.services.CustomUserDetailsService;
-import com.justin.healthyhabits.services.LoggerService;
 import com.justin.healthyhabits.services.UserService;
 import com.justin.healthyhabits.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class LoginController {
-
-    @Autowired
-    LoggerService logger;
 
     @Autowired
     UserService userService;

@@ -2,7 +2,6 @@ package com.justin.healthyhabits.controllers;
 
 import com.justin.healthyhabits.services.CustomUserDetailsService;
 import com.justin.healthyhabits.services.DataValidation;
-import com.justin.healthyhabits.services.LoggerService;
 import com.justin.healthyhabits.services.UserService;
 import com.justin.healthyhabits.user.Habit;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Controller
 public class HabitsController {
-
-    @Autowired
-    LoggerService logger;
 
     @Autowired
     UserService userService;
@@ -46,19 +41,15 @@ public class HabitsController {
             if (habit.getHabitType().equals("add")) {
                 if (!DataValidation.isHabitValid((habit))) return "errorpage";
                 else {
-                    if (habitExists(habit)) {
-                        updateHabit(habit);
-                    } else {
-                        addNewHabit(habit);
+                    if (habitExists(habit)) updateHabit(habit);
+                    else addNewHabit(habit);
                     }
-                }
             } else if (habit.getHabitType().equals("remove")) {
-                    userd.getUser().getHabits().remove(habit.getName());
-                }
+                userd.getUser().getHabits().remove(habit.getName());
+            }
             userService.saveUser(userd.getUser());
 
         } catch (NullPointerException | NoSuchElementException e) {
-            logger.addToLog("HabitsController Catch Error: " + e.toString(), true);
             return "errorpage";
         }
         return "habitspage";
@@ -68,34 +59,24 @@ public class HabitsController {
         return userd.getUser().getHabits();
     }
 
+    @SuppressWarnings("unchecked")
     private void addNewHabit(Habit habit) {
-        ArrayList<ArrayList> data = new ArrayList<>();
-        ArrayList<Long> dates = new ArrayList();
+        ArrayList<Long> dates = new ArrayList<>();
         dates.add(getDate());
         habit.setDates(dates);
         userd.getUser().getHabits().put(habit.getName(), habit);
-        data.add(dates);
-        logger.addToLog("Habit " + habit.getName() + " added for user " + userd.getUser().getUsername(), false);
     }
 
     private boolean habitExists(Habit habit) {
-        for (int i = 0; i < getUserHabits().size(); i++) {
-            if (getUserHabits().get(i).getName().equalsIgnoreCase(habit.getName())) {
-                return true;
-            }
-        }
-        return false;
+        return getUserHabits().containsKey(habit.getName());
     }
 
     private void updateHabit(Habit habit) {
-        for (int i = 0; i < getUserHabits().size(); i++) {
-            if (getUserHabits().get(habit.getName()) != null) {
-                userd.getUser().getHabits().get(habit.getName()).addDate(getDate());
-                userd.getUser().getHabits().get(habit.getName()).addRating(habit.getRatings().get(0));
-                userService.saveUser(userd.getUser());
-            }
+        if (getUserHabits().get(habit.getName()) != null) {
+            userd.getUser().getHabits().get(habit.getName()).addDate(getDate());
+            userd.getUser().getHabits().get(habit.getName()).addRating(habit.getRatings().get(0));
+            userService.saveUser(userd.getUser());
         }
-        logger.addToLog("Habit " + habit.getName() + " updated for user " + userd.getUser().getUsername(), false);
     }
 
     private long getDate() {

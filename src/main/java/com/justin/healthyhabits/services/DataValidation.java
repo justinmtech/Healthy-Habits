@@ -7,9 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DataValidation {
-    @Autowired
-    LoggerService logger;
-
     private static String inputString;
     private static int inputInt;
 

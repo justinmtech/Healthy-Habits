@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 
+<!--suppress GrazieInspection, XmlHighlighting -->
 <html>
 
 <html xmlns:th="http://www.w3.org/1999/xhtml">
@@ -61,14 +62,18 @@
                 let data = [];
                 let userHabits = [[${userHabits}]];
             /*]]>*/
+            console.log(userHabits);
 
-            for (let i = 0; i < userHabits.length; i++) {
+            let keys = Object.keys(userHabits);
+
+            for (const key of keys) {
                 let habit = {
-                    name: userHabits[i].name,
+                    name: userHabits[key].name,
                     data: []
                 };
-                for (let y = 0; y < userHabits[i].ratings.length; y++) {
-                    let habitData = [userHabits[i].dates[y], userHabits[i].ratings[y]];
+                const ratings = userHabits[key].ratings;
+                for (let y = 0; y < ratings.length; y++) {
+                    let habitData = [userHabits[key].dates[y], userHabits[key].ratings[y]];
                     habit.data.push(habitData);
                 }
             data.push(habit);

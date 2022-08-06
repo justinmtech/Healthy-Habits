@@ -151,6 +151,11 @@ body {
 	height: 500px;
 }
 
+#habits-list {
+    align: left;
+    text-align: left;
+}
+
 .section h1 {
 	font-size: 48px;
 	text-align: center;
