@@ -1,6 +1,7 @@
 package com.justin.healthyhabits.user;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Map;
 
 @Entity
@@ -61,4 +62,30 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void addHabit(Habit habit) {
+        ArrayList<Long> dates = new ArrayList<>();
+        dates.add(System.currentTimeMillis());
+        habit.setDates(dates);
+        getHabits().put(habit.getName(), habit);
+    }
+
+    public Habit removeHabit(String habitId) {
+        return getHabits().remove(habitId);
+    }
+
+    public boolean saveHabit(Habit habit) {
+        boolean habitExists = getHabits().get(habit.getName()) != null;
+        if (habitExists) {
+            getHabits().get(habit.getName()).addDate(System.currentTimeMillis());
+            getHabits().get(habit.getName()).addRating(habit.getRatings().get(0));
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasHabit(String habitId) {
+        return getHabits().containsKey(habitId);
+    }
+
 }
