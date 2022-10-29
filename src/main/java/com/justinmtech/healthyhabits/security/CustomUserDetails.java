@@ -1,7 +1,7 @@
-package com.justin.healthyhabits.security;
+package com.justinmtech.healthyhabits.security;
 
-import com.justin.healthyhabits.user.Habit;
-import com.justin.healthyhabits.user.User;
+import com.justinmtech.healthyhabits.user.Habit;
+import com.justinmtech.healthyhabits.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

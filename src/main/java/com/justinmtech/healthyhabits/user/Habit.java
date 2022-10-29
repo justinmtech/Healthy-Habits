@@ -1,4 +1,4 @@
-package com.justin.healthyhabits.user;
+package com.justinmtech.healthyhabits.user;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -52,8 +52,8 @@ public class Habit {
 
     public List<Long> convertDatesToMilliseconds() throws ParseException {
         List<Long> convertedDates = new ArrayList<>();
-        for (int i = 0; i < dates.size(); i++) {
-            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(dates.get(i)));
+        for (Long aLong : dates) {
+            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(aLong));
             convertedDates.add(date.getTime());
         }
         return convertedDates;

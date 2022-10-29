@@ -1,9 +1,9 @@
-package com.justin.healthyhabits.controllers;
+package com.justinmtech.healthyhabits.controllers;
 
-import com.justin.healthyhabits.services.CustomUserDetailsService;
-import com.justin.healthyhabits.services.DataValidation;
-import com.justin.healthyhabits.services.UserService;
-import com.justin.healthyhabits.user.Habit;
+import com.justinmtech.healthyhabits.services.CustomUserDetailsService;
+import com.justinmtech.healthyhabits.services.DataValidation;
+import com.justinmtech.healthyhabits.services.UserService;
+import com.justinmtech.healthyhabits.user.Habit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

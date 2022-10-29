@@ -1,11 +1,10 @@
-package com.justin.healthyhabits.services;
+package com.justinmtech.healthyhabits.services;
 
-import com.justin.healthyhabits.repositories.UserRepository;
-import com.justin.healthyhabits.user.User;
+import com.justinmtech.healthyhabits.repositories.UserRepository;
+import com.justinmtech.healthyhabits.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service

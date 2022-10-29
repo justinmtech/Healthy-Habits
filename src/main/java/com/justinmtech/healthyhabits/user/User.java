@@ -1,4 +1,4 @@
-package com.justin.healthyhabits.user;
+package com.justinmtech.healthyhabits.user;
 
 import javax.persistence.*;
 import java.util.ArrayList;

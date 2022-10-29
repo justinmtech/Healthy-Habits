@@ -1,7 +1,6 @@
-package com.justin.healthyhabits.services;
+package com.justinmtech.healthyhabits.services;
 
-import com.justin.healthyhabits.user.Habit;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.justinmtech.healthyhabits.user.Habit;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

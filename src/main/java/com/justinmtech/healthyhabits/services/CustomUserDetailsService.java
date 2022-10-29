@@ -1,7 +1,7 @@
-package com.justin.healthyhabits.services;
+package com.justinmtech.healthyhabits.services;
 
-import com.justin.healthyhabits.security.CustomUserDetails;
-import com.justin.healthyhabits.user.User;
+import com.justinmtech.healthyhabits.security.CustomUserDetails;
+import com.justinmtech.healthyhabits.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

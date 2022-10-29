@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.justin</groupId>
-    <artifactId>healthyhabits</artifactId>
+    <groupId>com.justinmtech</groupId>
+    <artifactId>Healthy-Habits</artifactId>
     <version>1.1</version>
 
     <parent>
@@ -45,7 +45,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.29</version>
+            <version>8.0.30</version>
         </dependency>
 
 
@@ -85,7 +85,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>2.7.0</version>
+            <version>2.7.5</version>
         </dependency>
     </dependencies>
 
@@ -101,7 +101,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.justin.healthyhabits.HealthyHabits</mainClass>
+                    <mainClass>com.justinmtech.healthyhabits.HealthyHabits</mainClass>
                 </configuration>
             </plugin>
             <plugin>
