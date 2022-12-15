@@ -4,6 +4,7 @@ import com.justinmtech.healthyhabits.services.CustomUserDetailsService;
 import com.justinmtech.healthyhabits.services.DataValidation;
 import com.justinmtech.healthyhabits.services.UserService;
 import com.justinmtech.healthyhabits.user.Habit;
+import com.justinmtech.healthyhabits.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +27,7 @@ public class HabitsController {
     @GetMapping("/habits")
     public String habitForm(Model model) {
         model.addAttribute("habit", new Habit());
-        model.addAttribute("user", userd.getUser());
+        model.addAttribute("user", getUser());
         return "habitspage";
     }
 
@@ -35,23 +36,55 @@ public class HabitsController {
         habit.setName(habit.getName().trim());
 
         model.addAttribute("habit", habit);
-        model.addAttribute("user", userd.getUser());
+        model.addAttribute("user", getUser());
 
         String habitSubmissionType = habit.getHabitType();
-        boolean habitExists = userd.getUser().hasHabit(habit.getName());
+        boolean habitExists = getUser().hasHabit(habit.getName());
 
+        return getResponse(habit, habitSubmissionType, habitExists);
+    }
+
+    private String getResponse(Habit habit, String habitSubmissionType, boolean habitExists) {
         try {
-            if (!DataValidation.isHabitValid((habit))) return "errorpage";
-            if (habitSubmissionType.equals("add")) {
-                if (habitExists) userd.getUser().saveHabit(habit);
-                else userd.getUser().addHabit(habit);
-            } else if (habitSubmissionType.equals("remove")) {
-                userd.getUser().removeHabit(habit.getName());
+            if (isHabitInvalid(habit)) return "errorpage";
+
+            if (addingSubmission(habitSubmissionType)) {
+                if (habitExists) {
+                    getUser().saveHabit(habit);
+                } else {
+                    getUser().addHabit(habit);
+                }
+            } else if (removingSubmission(habitSubmissionType)) {
+                getUser().removeHabit(habit.getName());
             }
-            userService.saveUser(userd.getUser());
+            getUserService().saveUser(getUser());
         } catch (NullPointerException | NoSuchElementException e) {
             return "errorpage";
         }
         return "habitspage";
+    }
+
+    private boolean isHabitInvalid(Habit habit) {
+        return !DataValidation.isHabitValid(habit);
+    }
+
+    private boolean addingSubmission(String habitSubmissionType) {
+        return habitSubmissionType.equals("add");
+    }
+
+    private boolean removingSubmission(String habitSubmissionType) {
+        return habitSubmissionType.equals("remove");
+    }
+
+    private UserService getUserService() {
+        return userService;
+    }
+
+    private CustomUserDetailsService getUserd() {
+        return userd;
+    }
+
+    private User getUser() {
+        return getUserd().getUser();
     }
 }
