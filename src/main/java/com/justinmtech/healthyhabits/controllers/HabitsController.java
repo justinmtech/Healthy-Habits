@@ -5,6 +5,7 @@ import com.justinmtech.healthyhabits.services.DataValidation;
 import com.justinmtech.healthyhabits.services.UserService;
 import com.justinmtech.healthyhabits.user.Habit;
 import com.justinmtech.healthyhabits.user.User;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,11 @@ public class HabitsController {
         return "habitspage";
     }
 
+    /**
+     * @param habit The Habit containing the model attributes
+     * @param model The model which attributes are added to
+     * @return The page ID the response should return
+     */
     @PostMapping("/habits")
     public String habitSubmit(@ModelAttribute Habit habit, Model model) {
         habit.setName(habit.getName().trim());
@@ -44,7 +50,7 @@ public class HabitsController {
         return getResponse(habit, habitSubmissionType, habitExists);
     }
 
-    private String getResponse(Habit habit, String habitSubmissionType, boolean habitExists) {
+    private String getResponse(@NotNull Habit habit, @NotNull String habitSubmissionType, boolean habitExists) {
         try {
             if (isHabitInvalid(habit)) return "errorpage";
 
@@ -64,15 +70,15 @@ public class HabitsController {
         return "habitspage";
     }
 
-    private boolean isHabitInvalid(Habit habit) {
+    private boolean isHabitInvalid(@NotNull Habit habit) {
         return !DataValidation.isHabitValid(habit);
     }
 
-    private boolean addingSubmission(String habitSubmissionType) {
+    private boolean addingSubmission(@NotNull String habitSubmissionType) {
         return habitSubmissionType.equals("add");
     }
 
-    private boolean removingSubmission(String habitSubmissionType) {
+    private boolean removingSubmission(@NotNull String habitSubmissionType) {
         return habitSubmissionType.equals("remove");
     }
 
