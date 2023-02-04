@@ -1,7 +1,9 @@
 package com.justinmtech.healthyhabits.user;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 @Entity
@@ -11,7 +13,7 @@ public class User {
     private String username;
     private String password;
     private String roles;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Map<String, Habit> habits;
 
     public String getUsername() {
@@ -24,12 +26,14 @@ public class User {
 
     public User() {
         this.roles = "USER";
+        this.habits = new HashMap<>();
     }
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
         this.roles = "USER";
+        this.habits = new HashMap<>();
     }
 
     public User(String username, String password, Map<String, Habit> habits) {

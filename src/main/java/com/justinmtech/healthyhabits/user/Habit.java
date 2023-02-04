@@ -1,9 +1,10 @@
 package com.justinmtech.healthyhabits.user;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,6 +37,8 @@ public class Habit {
     }
 
     public Habit() {
+        this.ratings = new ArrayList<>();
+        this.dates = new ArrayList<>();
     }
 
     public List<Long> getDates() {
@@ -50,7 +53,7 @@ public class Habit {
     dates.add(date);
     }
 
-    public List<Long> convertDatesToMilliseconds() throws ParseException {
+    private List<Long> convertDatesToMilliseconds() throws ParseException {
         List<Long> convertedDates = new ArrayList<>();
         for (Long aLong : dates) {
             Date date = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(aLong));
