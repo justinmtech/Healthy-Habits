@@ -6,13 +6,38 @@
 
     <groupId>com.justinmtech</groupId>
     <artifactId>Healthy-Habits</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
 
     <properties>
         <java.version>17</java.version>
         <source>17</source>
         <target>17</target>
     </properties>
+
+    <name>Healthy Habits</name>
+    <description>Visualize your habits and progress over time.</description>
+    <url>https://github.com/justinmtech/Healthy-Habits</url>
+
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/justinmtech/Healthy-Habits/issues</url>
+    </issueManagement>
+
+    <developers>
+        <developer>
+            <name>Justin</name>
+            <email>contact@justinmtech.com</email>
+            <url>https://github.com/justinmtech</url>
+        </developer>
+    </developers>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
