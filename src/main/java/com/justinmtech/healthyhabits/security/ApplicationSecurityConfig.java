@@ -28,9 +28,9 @@ public class ApplicationSecurityConfig {
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/", "/register", "/css/*", "/js/*").permitAll()
-                .antMatchers("/visualizer", "/habits", "/logout").authenticated()
+                .authorizeHttpRequests()
+                .requestMatchers("/", "/register", "/css/*", "/js/*", "/errorpage").permitAll()
+                .requestMatchers("/visualizer", "/habits", "/logout").authenticated()
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/").deleteCookies("JSESSIONID")
