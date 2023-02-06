@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class VisualizerController {
 
     @Autowired
-    CustomUserDetailsService userd;
+    private CustomUserDetailsService userd;
 
     @GetMapping("/visualizer")
     public String graph(Model model) {

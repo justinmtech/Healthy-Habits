@@ -19,10 +19,10 @@ import java.util.NoSuchElementException;
 public class HabitsController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    CustomUserDetailsService userd;
+    private CustomUserDetailsService userd;
 
     @SuppressWarnings("SameReturnValue")
     @GetMapping("/habits")

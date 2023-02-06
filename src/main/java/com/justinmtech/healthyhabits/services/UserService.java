@@ -11,7 +11,7 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     public Optional<User> getUser(String id) {
         return userRepository.findById(id);

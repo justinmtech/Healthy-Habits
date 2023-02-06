@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RegisterController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     public RegisterController(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
